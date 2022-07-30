@@ -1,0 +1,4 @@
+name: Monstermod
+version: '${project.version}'
+main: fred.monstermod.Monstermod
+api-version: 1.19
