@@ -1,10 +1,12 @@
 package fred.monstermod.listeners;
 
+import fred.monstermod.core.DifficultyScaler;
 import fred.monstermod.general.HordeSpawner;
 import fred.monstermod.general.MobSpawnSpeedAdder;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.core.listeners.iCustomSpawnEventListener;
 import fred.monstermod.core.listeners.iCustomSpawnListener;
+import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -30,6 +32,13 @@ public class SpawnEventListener implements Listener {
     @EventHandler
     public void onEntitySpawnEvent(CreatureSpawnEvent event)
     {
+        // Protect again magma cubes / slimes
+        if (event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.SLIME_SPLIT)
+        {
+            return;
+        }
+
+        // Protect again when we spawn normal
         if (event.getSpawnReason() == CreatureSpawnEvent.SpawnReason.CUSTOM)
         {
             return;
@@ -46,7 +55,9 @@ public class SpawnEventListener implements Listener {
             eventListener.OnCustomSpawn(event);
         }
 
-        for (int i = 0; i < spawnModifier.get(); i++)
+        final double spawnModifierScaled = DifficultyScaler.scale(spawnModifier.get());
+        Bukkit.getLogger().info("Spawning " + event.getEntityType().toString() + "additional: " + spawnModifierScaled);
+        for (int i = 0; i < spawnModifierScaled; i++)
         {
             World world = event.getLocation().getWorld();
             Location spawnLocation = event.getLocation();

@@ -42,8 +42,9 @@ public class Modifiers {
 
     private void addSpawnModifiers()
     {
-        List<Integer> defaultSpawnMod = Arrays.asList(3,4,5,6,6,7,7);
+        List<Integer> zeroSpawnMod = Arrays.asList(0,0,0,0,0,0,0);
         List<Integer> halfDefaultSpawnMod = Arrays.asList(2,2,3,3,4,4,5);
+        List<Integer> defaultSpawnMod = Arrays.asList(3,4,5,6,6,7,7);
 
         spawn.put(EntityType.ZOMBIE, defaultSpawnMod);
         spawn.put(EntityType.SKELETON, defaultSpawnMod);
@@ -63,8 +64,8 @@ public class Modifiers {
         spawn.put(EntityType.CAVE_SPIDER, defaultSpawnMod);
         spawn.put(EntityType.SILVERFISH, halfDefaultSpawnMod);
         spawn.put(EntityType.BLAZE, defaultSpawnMod);
-        spawn.put(EntityType.MAGMA_CUBE, halfDefaultSpawnMod);
-        spawn.put(EntityType.ENDER_DRAGON, Arrays.asList(0,0,0,0,0,0,0));
+        spawn.put(EntityType.MAGMA_CUBE, defaultSpawnMod);
+        spawn.put(EntityType.ENDER_DRAGON, zeroSpawnMod);
         spawn.put(EntityType.WITHER, halfDefaultSpawnMod);
         spawn.put(EntityType.BAT, defaultSpawnMod);
         spawn.put(EntityType.WITCH, halfDefaultSpawnMod);
