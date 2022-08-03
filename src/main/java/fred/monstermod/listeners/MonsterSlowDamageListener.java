@@ -2,11 +2,8 @@ package fred.monstermod.listeners;
 
 import fred.monstermod.core.Config;
 import fred.monstermod.core.DifficultyScaler;
-import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.core.RandomUtil;
 import fred.monstermod.core.listeners.TicksUtil;
-import org.bukkit.Bukkit;
-import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -42,7 +39,6 @@ public class MonsterSlowDamageListener implements Listener {
         }
 
         Player player = (Player) event.getEntity();
-
 
         final int duration = TicksUtil.secondsToTicks(7.5);
         final int scaledDuration = (int)Math.round(DifficultyScaler.scaleWithPhases(duration));

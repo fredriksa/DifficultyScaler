@@ -1,20 +1,20 @@
-package fred.monstermod.general;
+package fred.monstermod.listeners;
 
 import fred.monstermod.core.Config;
 import fred.monstermod.core.RandomUtil;
-import fred.monstermod.core.listeners.iCustomSpawnListener;
-import org.bukkit.Bukkit;
+import fred.monstermod.events.AdditionalEntitySpawnEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
-import org.bukkit.event.entity.CreatureSpawnEvent;
+import org.bukkit.event.EventHandler;
+import org.bukkit.event.Listener;
 import org.bukkit.potion.PotionEffect;
 import org.bukkit.potion.PotionEffectType;
 
 import java.util.Arrays;
 import java.util.List;
 
-public class UndergroundMobSpawnSpeedAdder implements iCustomSpawnListener {
+public class UndergroundMobSpawnSpeedAdderListener implements Listener {
     final List<EntityType> speedEffectTypes = Arrays.asList(
             EntityType.ZOMBIE,
             EntityType.SPIDER,
@@ -24,10 +24,11 @@ public class UndergroundMobSpawnSpeedAdder implements iCustomSpawnListener {
             EntityType.BAT
     );
 
-    @Override
-    public void OnCustomSpawn(CreatureSpawnEvent event, Entity spawnedMob) {
-        final String worldName = event.getLocation().getWorld().getName();
-        if (!worldName.equals("world") || !shouldMobHaveSpeedMod(spawnedMob))
+    @EventHandler
+    public void onAdditionalEntitySpawn(AdditionalEntitySpawnEvent event) {
+        final Entity spawnedEntity = event.getEntity();
+        final String worldName = spawnedEntity.getWorld().getName();
+        if (!worldName.equals("world") || !shouldMobHaveSpeedMod(spawnedEntity))
         {
             return;
         }
@@ -38,11 +39,11 @@ public class UndergroundMobSpawnSpeedAdder implements iCustomSpawnListener {
             return;
         }
 
-        final Byte lightLevel = event.getLocation().getBlock().getLightFromSky();
-        if (spawnedMob instanceof LivingEntity && lightLevel == 0)
+        final Byte lightLevel = spawnedEntity.getLocation().getBlock().getLightFromSky();
+        if (spawnedEntity instanceof LivingEntity && lightLevel == 0)
         {
             PotionEffect potionEffect = new PotionEffect(PotionEffectType.SPEED, Integer.MAX_VALUE, 2);
-            potionEffect.apply((LivingEntity)spawnedMob);
+            potionEffect.apply((LivingEntity)spawnedEntity);
         }
     }
 

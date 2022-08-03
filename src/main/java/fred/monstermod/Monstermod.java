@@ -1,7 +1,10 @@
 package fred.monstermod;
 
+import fred.monstermod.listeners.HordeSpawnerListener;
+import fred.monstermod.listeners.OverworldMobSpawnSpeedAdderListener;
 import fred.monstermod.general.PhaseChangedAdverter;
 import fred.monstermod.core.PluginRegistry;
+import fred.monstermod.listeners.UndergroundMobSpawnSpeedAdderListener;
 import fred.monstermod.listeners.*;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
@@ -42,5 +45,8 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new DrownedTridentDamageListener(), this);
         pluginManager.registerEvents(new TorchPlacementPreventionListener(), this);
         pluginManager.registerEvents(new MonsterSlowDamageListener(), this);
+        pluginManager.registerEvents(new OverworldMobSpawnSpeedAdderListener(), this);
+        pluginManager.registerEvents(new UndergroundMobSpawnSpeedAdderListener(), this);
+        pluginManager.registerEvents(new HordeSpawnerListener(), this);
     }
 }
