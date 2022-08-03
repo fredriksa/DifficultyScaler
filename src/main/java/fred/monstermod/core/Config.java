@@ -11,9 +11,6 @@ public class Config {
     // How much the difficulty increases for each additional player online (0.25 = 25%)
     public static final double DIFFICULTY_MODIFIER_PER_PLAYER = 0.25;
 
-    // How much each phase level affects a scaled value
-    public static final double PHASE_SCALE_MODIFIER = 0.25;
-
     // Chance for having mobs underground spawn with increased movement speed
     public static final int MOB_SPEED_ADD_UNDERGROUND_MIN_CHANCE = 5;
     public static final int MOB_SPEED_ADD_UNDERGROUND_MAX_CHANCE = 35;
@@ -27,4 +24,7 @@ public class Config {
 
     public static final int ZOMBIE_SLOW_MIN_CHANCE = 9;
     public static final int ZOMBIE_SLOW_MAX_CHANCE = 40;
+
+    public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MIN_CHANCE = 20;
+    public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MAX_CHANCE = 50;
 }
