@@ -11,7 +11,7 @@ import org.bukkit.potion.PotionEffectType;
 import java.util.Arrays;
 import java.util.List;
 
-public class MobSpawnSpeedAdder implements iCustomSpawnListener {
+public class OverworldMobSpawnSpeedAdder implements iCustomSpawnListener {
     final List<EntityType> speedEffectTypes = Arrays.asList(
             EntityType.ZOMBIE,
             EntityType.SPIDER,

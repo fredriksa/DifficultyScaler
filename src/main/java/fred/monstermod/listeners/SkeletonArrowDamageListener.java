@@ -42,6 +42,5 @@ public class SkeletonArrowDamageListener implements Listener {
         }
 
         event.setCancelled(true);
-        Bukkit.getLogger().info("Canceled skeleton on skeleton event!");
     }
 }

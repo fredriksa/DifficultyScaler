@@ -2,11 +2,11 @@ package fred.monstermod.listeners;
 
 import fred.monstermod.core.DifficultyScaler;
 import fred.monstermod.general.HordeSpawner;
-import fred.monstermod.general.MobSpawnSpeedAdder;
+import fred.monstermod.general.OverworldMobSpawnSpeedAdder;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.core.listeners.iCustomSpawnEventListener;
 import fred.monstermod.core.listeners.iCustomSpawnListener;
-import org.bukkit.Bukkit;
+import fred.monstermod.general.UndergroundMobSpawnSpeedAdder;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.entity.Entity;
@@ -25,7 +25,8 @@ public class SpawnEventListener implements Listener {
 
     public SpawnEventListener()
     {
-        spawnListeners.add(new MobSpawnSpeedAdder());
+        spawnListeners.add(new OverworldMobSpawnSpeedAdder());
+        spawnListeners.add(new UndergroundMobSpawnSpeedAdder());
         spawnEventListeners.add(new HordeSpawner());
     }
 
@@ -56,7 +57,7 @@ public class SpawnEventListener implements Listener {
         }
 
         final double spawnModifierScaled = DifficultyScaler.scale(spawnModifier.get());
-        Bukkit.getLogger().info("Spawning " + event.getEntityType().toString() + "additional: " + spawnModifierScaled);
+        //Bukkit.getLogger().info("Spawning " + event.getEntityType().toString() + "additional: " + spawnModifierScaled);
         for (int i = 0; i < spawnModifierScaled; i++)
         {
             World world = event.getLocation().getWorld();
