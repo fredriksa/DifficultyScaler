@@ -40,4 +40,7 @@ public class Config {
     public static final int SPIDER_PER_WEB_SPAWN_MAX_CHANCE = 80;
 
     public static final int SPIDER_WEB_DURATION_SECONDS = 10;
+
+    public static final int SKELETON_DODGE_ARROW_MIN_CHANCE = 30; // 30
+    public static final int SKELETON_DODGE_ARROW_MAX_CHANCE = 50; // 50
 }

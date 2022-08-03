@@ -51,5 +51,6 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new MonsterEquipmentAddListener(), this);
         pluginManager.registerEvents(new SpiderDeathListener(), this);
         pluginManager.registerEvents(new BlockBreakDropPreventListener(), this);
+        pluginManager.registerEvents(new SkeletonDodgeArrowListener(), this);
     }
 }
