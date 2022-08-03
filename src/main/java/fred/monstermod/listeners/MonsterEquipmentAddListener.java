@@ -1,11 +1,13 @@
 package fred.monstermod.listeners;
 
 import fred.monstermod.core.Config;
+import fred.monstermod.core.DifficultyScaler;
 import fred.monstermod.core.MathUtils;
 import fred.monstermod.core.RandomUtil;
 import fred.monstermod.events.AdditionalEntitySpawnEvent;
 import org.bukkit.Bukkit;
 import org.bukkit.Material;
+import org.bukkit.enchantments.Enchantment;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
@@ -16,6 +18,7 @@ import org.bukkit.inventory.ItemStack;
 
 import java.util.Arrays;
 import java.util.List;
+import java.util.Random;
 
 public class MonsterEquipmentAddListener implements Listener {
 
@@ -44,21 +47,26 @@ public class MonsterEquipmentAddListener implements Listener {
 
     private void addWeaponTo(Entity spawnedEntity)
     {
-        if (!RandomUtil.shouldEventOccur(Config.ZOMBIE_EQUIPMENT_PER_PIECE_MIN_CHANCE, Config.ZOMBIE_EQUIPMENT_PER_PIECE_MAX_CHANCE))
-        {
-            return;
-        }
-
         final double yLevel = spawnedEntity.getLocation().getY();
         final LivingEntity livingEntity = (LivingEntity) spawnedEntity;
         final EntityEquipment equipment = livingEntity.getEquipment();
 
         if (spawnedEntity.getType() == EntityType.SKELETON)
         {
-            return;
+            if (!RandomUtil.shouldEventOccur(Config.ARCHER_WEAPON_MIN_CHANCE, Config.ARCHER_WEAPON_MAX_CHANCE))
+            {
+                return;
+            }
+
+            addSkeletonWeapon(spawnedEntity);
         }
         else
         {
+            if (!RandomUtil.shouldEventOccur(Config.MONSTER_WEAPON_MIN_CHANCE, Config.MONSTER_WEAPON_MAX_CHANCE))
+            {
+                return;
+            }
+
             Material material = null;
             if (RandomUtil.shouldEventOccur(50))
             {
@@ -107,8 +115,6 @@ public class MonsterEquipmentAddListener implements Listener {
             ItemStack boots = new ItemStack(material);
             equipment.setBoots(boots);
         }
-
-        //equipment.setItemInMainHand(sword);
     }
 
     private Material getMaterial(List<Material> materials, double yLevel)
@@ -162,5 +168,30 @@ public class MonsterEquipmentAddListener implements Listener {
         }
 
         return true;
+    }
+
+    private void addSkeletonWeapon(Entity skeleton)
+    {
+        final ItemStack bow = new ItemStack(Material.BOW);
+
+        Random random = new Random();
+        final int randomNr = random.nextInt(3) + 1;
+
+        if (randomNr == 1)
+        {
+            bow.addEnchantment(Enchantment.ARROW_FIRE, (int) DifficultyScaler.scaleWithPhases(1));
+        }
+        else if (randomNr == 2)
+        {
+            bow.addEnchantment(Enchantment.ARROW_DAMAGE, (int) DifficultyScaler.scaleWithPhases(1));
+        }
+        else if (randomNr == 3)
+        {
+            bow.addEnchantment(Enchantment.KNOCKBACK, (int) DifficultyScaler.scaleWithPhases(3));
+        }
+
+        final LivingEntity livingSkeleton = (LivingEntity) skeleton;
+        final EntityEquipment equipment = livingSkeleton.getEquipment();
+        equipment.setItemInMainHand(bow);
     }
 }

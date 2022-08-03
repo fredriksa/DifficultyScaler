@@ -28,6 +28,11 @@ public class Config {
     public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MIN_CHANCE = 20;
     public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MAX_CHANCE = 40;
 
+    public static final int MONSTER_WEAPON_MIN_CHANCE = 30;
+    public static final int MONSTER_WEAPON_MAX_CHANCE = 50;
+
+    public static final int ARCHER_WEAPON_MIN_CHANCE = 40;
+    public static final int ARCHER_WEAPON_MAX_CHANCE = 65;
 
     public static final int SPIDER_WEB_SPAWN_MIN_CHANCE = 50;
     public static final int SPIDER_WEB_SPAWN_MAX_CHANCE = 75;
