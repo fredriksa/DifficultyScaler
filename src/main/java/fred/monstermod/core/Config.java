@@ -14,4 +14,6 @@ public class Config {
     // Chance for having mobs underground spawn with increased movement speed
     public static final int MOB_SPEED_ADD_UNDERGROUND_MIN_CHANCE = 5;
     public static final int MOB_SPEED_ADD_UNDERGROUND_MAX_CHANCE = 35;
+
+    public static final int SILK_TOUCH_MONSTER_SPAWNER_DROP_CHANCE = 40;
 }

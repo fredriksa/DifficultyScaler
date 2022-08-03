@@ -23,6 +23,8 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new CreeperExplosionPreventionListener(), this);
         pluginManager.registerEvents(new SkeletonArrowDamageListener(), this);
         pluginManager.registerEvents(new CreeperExplosionDamageListener(), this);
+        pluginManager.registerEvents(new MonsterSpawnerBlockBreakListener(), this);
+        pluginManager.registerEvents(new MonsterSpawnerBreakEventListener(), this);
 
         PluginRegistry.Instance().timeTracker.runTaskTimer(this, 0, 20L * 3L);
         PluginRegistry.Instance().timeTracker.listen(new DayChangedAdverter());
