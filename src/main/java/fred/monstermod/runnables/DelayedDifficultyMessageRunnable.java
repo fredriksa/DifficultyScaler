@@ -25,7 +25,7 @@ public class DelayedDifficultyMessageRunnable extends BukkitRunnable {
         final int playerCount = Bukkit.getServer().getOnlinePlayers().size();
         if (playerCount > 0)
         {
-            final double scaledValue =  DifficultyScaler.scale(1);
+            final double scaledValue =  DifficultyScaler.scaleWithPlayers(1);
             final int scaledValueToPct = (int) (scaledValue * 100);
 
             final String baseMessage = "Difficulty modifier updated to ";

@@ -20,7 +20,7 @@ public class Modifiers {
     {
         if (spawn.containsKey(type))
         {
-            final int currentDay = (int)PluginRegistry.Instance().timeTracker.getCurrentDay();
+            final int currentDay = (int)PluginRegistry.Instance().timeTracker.getCurrentPhase();
             return Optional.of(spawn.get(type).get(currentDay - 1));
         }
 

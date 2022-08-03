@@ -56,7 +56,7 @@ public class SpawnEventListener implements Listener {
             eventListener.OnCustomSpawn(event);
         }
 
-        final double spawnModifierScaled = DifficultyScaler.scale(spawnModifier.get());
+        final double spawnModifierScaled = DifficultyScaler.scaleWithPlayers(spawnModifier.get());
         //Bukkit.getLogger().info("Spawning " + event.getEntityType().toString() + "additional: " + spawnModifierScaled);
         for (int i = 0; i < spawnModifierScaled; i++)
         {

@@ -1,10 +1,9 @@
 package fred.monstermod;
 
-import fred.monstermod.general.DayChangedAdverter;
+import fred.monstermod.general.PhaseChangedAdverter;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.listeners.*;
 import org.bukkit.Bukkit;
-import org.bukkit.entity.Drowned;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -18,7 +17,7 @@ public final class Monstermod extends JavaPlugin {
         registerEvents();
 
         PluginRegistry.Instance().timeTracker.runTaskTimer(this, 0, 20L * 3L);
-        PluginRegistry.Instance().timeTracker.listen(new DayChangedAdverter());
+        PluginRegistry.Instance().timeTracker.listen(new PhaseChangedAdverter());
     }
 
     @Override
@@ -42,5 +41,6 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new DrownedSpawnEventListener(), this);
         pluginManager.registerEvents(new DrownedTridentDamageListener(), this);
         pluginManager.registerEvents(new TorchPlacementPreventionListener(), this);
+        pluginManager.registerEvents(new MonsterSlowDamageListener(), this);
     }
 }
