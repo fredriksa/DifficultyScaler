@@ -3,6 +3,7 @@ package fred.monstermod.core;
 import org.bukkit.block.Block;
 import org.bukkit.block.data.BlockData;
 import org.bukkit.block.data.Directional;
+import org.bukkit.metadata.FixedMetadataValue;
 
 public class BlockUtils {
 
@@ -20,5 +21,10 @@ public class BlockUtils {
         }
 
         return face;
+    }
+
+    public static void preventBlockDropOnBreak(Block block)
+    {
+        block.setMetadata("dropOnBreak", new FixedMetadataValue(PluginRegistry.Instance().monsterMod, false));
     }
 }

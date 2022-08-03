@@ -27,4 +27,12 @@ public class Config {
 
     public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MIN_CHANCE = 20;
     public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MAX_CHANCE = 40;
+
+
+    public static final int SPIDER_WEB_SPAWN_MIN_CHANCE = 50;
+    public static final int SPIDER_WEB_SPAWN_MAX_CHANCE = 75;
+    public static final int SPIDER_PER_WEB_SPAWN_MIN_CHANCE = 50;
+    public static final int SPIDER_PER_WEB_SPAWN_MAX_CHANCE = 80;
+
+    public static final int SPIDER_WEB_DURATION_SECONDS = 10;
 }

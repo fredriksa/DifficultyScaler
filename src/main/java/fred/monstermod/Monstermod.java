@@ -49,5 +49,7 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new UndergroundMobSpawnSpeedAdderListener(), this);
         pluginManager.registerEvents(new HordeSpawnerListener(), this);
         pluginManager.registerEvents(new MonsterEquipmentAddListener(), this);
+        pluginManager.registerEvents(new SpiderDeathListener(), this);
+        pluginManager.registerEvents(new BlockBreakDropPreventListener(), this);
     }
 }
