@@ -55,7 +55,7 @@ public class MonsterEquipmentAddListener implements Listener {
 
         if (spawnedEntity.getType() == EntityType.SKELETON)
         {
-
+            return;
         }
         else
         {
