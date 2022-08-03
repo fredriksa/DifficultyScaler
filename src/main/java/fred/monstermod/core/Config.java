@@ -26,5 +26,5 @@ public class Config {
     public static final int ZOMBIE_SLOW_MAX_CHANCE = 40;
 
     public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MIN_CHANCE = 20;
-    public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MAX_CHANCE = 50;
+    public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MAX_CHANCE = 40;
 }

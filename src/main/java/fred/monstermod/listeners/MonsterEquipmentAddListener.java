@@ -26,7 +26,9 @@ public class MonsterEquipmentAddListener implements Listener {
     private List<Material> legs = Arrays.asList(Material.LEATHER_LEGGINGS, Material.IRON_LEGGINGS, Material.GOLDEN_LEGGINGS, Material.DIAMOND_LEGGINGS);
     private List<Material> boots = Arrays.asList(Material.LEATHER_BOOTS, Material.IRON_BOOTS, Material.GOLDEN_BOOTS, Material.DIAMOND_BOOTS);
 
-    private final int waterYLevel = 62;
+    private List<Material> swords = Arrays.asList(Material.WOODEN_SWORD, Material.STONE_SWORD, Material.IRON_SWORD, Material.GOLDEN_SWORD);
+
+    private List<Material> axes = Arrays.asList(Material.WOODEN_AXE, Material.STONE_AXE, Material.IRON_AXE, Material.GOLDEN_AXE);
 
     @EventHandler
     public void onAdditionalEntitySpawn(AdditionalEntitySpawnEvent event)
@@ -36,9 +38,40 @@ public class MonsterEquipmentAddListener implements Listener {
         if (shouldAddArmorTo(spawnedEntity))
         {
             addArmorTo(spawnedEntity);
+            addWeaponTo(spawnedEntity);
+        }
+    }
+
+    private void addWeaponTo(Entity spawnedEntity)
+    {
+        if (!RandomUtil.shouldEventOccur(Config.ZOMBIE_EQUIPMENT_PER_PIECE_MIN_CHANCE, Config.ZOMBIE_EQUIPMENT_PER_PIECE_MAX_CHANCE))
+        {
+            return;
         }
 
-        // add weapons
+        final double yLevel = spawnedEntity.getLocation().getY();
+        final LivingEntity livingEntity = (LivingEntity) spawnedEntity;
+        final EntityEquipment equipment = livingEntity.getEquipment();
+
+        if (spawnedEntity.getType() == EntityType.SKELETON)
+        {
+
+        }
+        else
+        {
+            Material material = null;
+            if (RandomUtil.shouldEventOccur(50))
+            {
+                material = getMaterial(swords, yLevel);
+            }
+            else
+            {
+                material = getMaterial(axes, yLevel);
+            }
+
+            ItemStack mainHand = new ItemStack(material);
+            equipment.setItemInMainHand(mainHand);
+        }
     }
 
     private void addArmorTo(Entity entity)
