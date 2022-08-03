@@ -55,7 +55,7 @@ public class Modifiers {
         spawn.put(EntityType.EVOKER, defaultSpawnMod);
         spawn.put(EntityType.VEX, halfDefaultSpawnMod);
         spawn.put(EntityType.VINDICATOR, halfDefaultSpawnMod);
-        spawn.put(EntityType.CREEPER, halfDefaultSpawnMod);
+        spawn.put(EntityType.CREEPER, defaultSpawnMod);
         spawn.put(EntityType.SPIDER, defaultSpawnMod);
         spawn.put(EntityType.GIANT, halfDefaultSpawnMod);
         spawn.put(EntityType.SLIME, halfDefaultSpawnMod);

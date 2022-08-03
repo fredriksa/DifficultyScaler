@@ -16,4 +16,9 @@ public class Config {
     public static final int MOB_SPEED_ADD_UNDERGROUND_MAX_CHANCE = 35;
 
     public static final int SILK_TOUCH_MONSTER_SPAWNER_DROP_CHANCE = 40;
+
+    public static final int DROWNED_TRIDENT_SPAWN_MIN_CHANCE = 10;
+    public static final int DROWNED_TRIDENT_SPAWN_MAX_CHANCE = 80;
+
+    public static final int TORCH_LOWEST_Y_LEVEL = 20;
 }

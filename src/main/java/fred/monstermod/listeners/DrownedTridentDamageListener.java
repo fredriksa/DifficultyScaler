@@ -1,6 +1,5 @@
 package fred.monstermod.listeners;
 
-import org.bukkit.Bukkit;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
@@ -9,10 +8,10 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityDamageByEntityEvent;
 
-public class SkeletonArrowDamageListener implements Listener {
+public class DrownedTridentDamageListener implements Listener {
 
     @EventHandler
-    public void onArrowDamage(EntityDamageByEntityEvent event)
+    public void onEntityDamageEvent(EntityDamageByEntityEvent event)
     {
         final boolean isDamageTakenByMonster = event.getEntity() instanceof Monster;
         final boolean isDamageFromProjectile = event.getDamager() instanceof Projectile;
@@ -23,8 +22,8 @@ public class SkeletonArrowDamageListener implements Listener {
         }
 
         Projectile projectile = (Projectile) event.getDamager();
-        final boolean isProjectileArrow = (projectile.getType() == EntityType.ARROW);
-        if (!isProjectileArrow)
+        final boolean isProjectileTrident = (projectile.getType() == EntityType.TRIDENT);
+        if (!isProjectileTrident)
         {
             return;
         }
@@ -36,8 +35,8 @@ public class SkeletonArrowDamageListener implements Listener {
         }
 
         Entity shooter = (Entity) projectile.getShooter();
-        final boolean isSkeletonShooter = shooter.getType() == EntityType.SKELETON;
-        if (!isSkeletonShooter)
+        final boolean isDrownedThrower = shooter.getType() == EntityType.DROWNED;
+        if (!isDrownedThrower)
         {
             return;
         }
