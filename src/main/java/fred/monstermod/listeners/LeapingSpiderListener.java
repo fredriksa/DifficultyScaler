@@ -18,6 +18,12 @@ public class LeapingSpiderListener implements Listener {
             return;
         }
 
+        final boolean isInNaturallyLitArea = event.getEntity().getLocation().getBlock().getLightFromSky() > 0;
+        if (isInNaturallyLitArea)
+        {
+            return;
+        }
+
         if (!RandomUtil.shouldEventOccur(Config.LEAPING_SPIDER_MIN_CHANCE, Config.LEAPING_SPIDER_MAX_CHANCE))
         {
             return;

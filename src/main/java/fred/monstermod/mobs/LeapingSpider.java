@@ -26,7 +26,7 @@ public class LeapingSpider {
     private static List<EntityType> spiderTypes = Arrays.asList(EntityType.SPIDER, EntityType.CAVE_SPIDER);
 
     private static final int spiderHealth = 50;
-    private static int MINIMUM_JUMP_DISTANCE = 10;
+    private static int MINIMUM_JUMP_DISTANCE = 7;
 
     public static void morphIntoLeapingSpider(Spider spider)
     {
