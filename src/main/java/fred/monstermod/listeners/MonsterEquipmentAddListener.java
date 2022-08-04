@@ -175,11 +175,11 @@ public class MonsterEquipmentAddListener implements Listener {
         final ItemStack bow = new ItemStack(Material.BOW);
 
         Random random = new Random();
-        final int randomNr = random.nextInt(3) + 1;
+        final int randomNr = random.nextInt(2) + 1;
 
         if (randomNr == 1)
         {
-            bow.addEnchantment(Enchantment.ARROW_FIRE, (int) DifficultyScaler.scaleWithPhases(1));
+            bow.addEnchantment(Enchantment.ARROW_FIRE, 1);
         }
         else if (randomNr == 2)
         {
@@ -187,7 +187,7 @@ public class MonsterEquipmentAddListener implements Listener {
         }
         else if (randomNr == 3)
         {
-            bow.addEnchantment(Enchantment.KNOCKBACK, (int) DifficultyScaler.scaleWithPhases(3));
+            bow.addEnchantment(Enchantment.ARROW_KNOCKBACK, (int) DifficultyScaler.scaleWithPhases(1));
         }
 
         final LivingEntity livingSkeleton = (LivingEntity) skeleton;

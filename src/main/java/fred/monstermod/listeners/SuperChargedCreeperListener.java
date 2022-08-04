@@ -2,9 +2,7 @@ package fred.monstermod.listeners;
 
 import fred.monstermod.core.Config;
 import fred.monstermod.core.DifficultyScaler;
-import fred.monstermod.core.MathUtils;
 import fred.monstermod.core.RandomUtil;
-import org.bukkit.Bukkit;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Creeper;
 import org.bukkit.entity.EntityType;

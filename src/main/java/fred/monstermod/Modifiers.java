@@ -82,6 +82,6 @@ public class Modifiers {
         spawn.put(EntityType.STRIDER, defaultSpawnMod);
         spawn.put(EntityType.ZOGLIN, defaultSpawnMod);
         spawn.put(EntityType.PIGLIN_BRUTE, halfDefaultSpawnMod);
-        spawn.put(EntityType.WARDEN, halfDefaultSpawnMod);
+        spawn.put(EntityType.WARDEN, zeroSpawnMod);
     }
 }

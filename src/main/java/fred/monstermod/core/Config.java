@@ -3,8 +3,8 @@ package fred.monstermod.core;
 public class Config {
     public static final double ACID_RAIN_MIN_DAMAGE = 0.5d;
     public static final double ACID_RAIN_FINAL_DAY_DAMAGE = 2;
-    public static final int ACID_RAIN_START_MIN_CHANCE = 5;
-    public static final int ACID_RAIN_START_MAX_CHANCE = 40;
+    public static final int ACID_RAIN_START_MIN_CHANCE = 10;
+    public static final int ACID_RAIN_START_MAX_CHANCE = 50;
     public static final int ZOMBIE_HORDE_MIN_CHANCE = 10;
     public static final int ZOMBIE_HORDE_MAX_CHANCE = 20;
 
@@ -41,11 +41,18 @@ public class Config {
 
     public static final int SPIDER_WEB_DURATION_SECONDS = 10;
 
-    public static final int SKELETON_DODGE_ARROW_MIN_CHANCE = 30;
-    public static final int SKELETON_DODGE_ARROW_MAX_CHANCE = 50;
+    public static final int SKELETON_DODGE_ARROW_MIN_CHANCE = 10;
+    public static final int SKELETON_DODGE_ARROW_MAX_CHANCE = 30;
 
     public static final int SUPERCHAGED_CREEPER_MAX_Y_LEVEL = 0;
 
     public static final int SUPERCHARGED_CREEPER_MIN_CHANCE = 8;
     public static final int SUPERCHAGED_CREEPER_MAX_CHANCE = 40;
+
+    public static final int LEAPING_SPIDER_MIN_CHANCE = 5;
+    public static final int LEAPING_SPIDER_MAX_CHANCE = 25;
+
+    public static final int LEAPING_SPIDER_JUMP_EVERY_SECOND_MIN = 2;
+
+    public static final int LEAPING_SPIDER_JUMP_EVERY_SECOND_MAX = 5;
 }

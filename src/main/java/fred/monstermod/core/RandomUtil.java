@@ -1,5 +1,7 @@
 package fred.monstermod.core;
 
+import org.bukkit.Bukkit;
+
 import java.util.Random;
 
 public class RandomUtil {
@@ -31,5 +33,13 @@ public class RandomUtil {
         Random random = new Random();
         final int randomInt = random.nextInt(100) + 1;
         return randomInt <= probability;
+    }
+
+    public static double random(int min, int max)
+    {
+        Random random = new Random();
+        final double nextDouble = random.nextDouble();
+        final double candidate =  nextDouble * max;
+        return Math.max(min, candidate);
     }
 }
