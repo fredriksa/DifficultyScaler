@@ -55,4 +55,7 @@ public class Config {
     public static final int LEAPING_SPIDER_JUMP_EVERY_SECOND_MIN = 2;
 
     public static final int LEAPING_SPIDER_JUMP_EVERY_SECOND_MAX = 5;
+
+    public static final int ZOMBIE_PIGLIN_LOOK_AT_AGGRO_CHANCE_MIN = 40;
+    public static final int ZOMBIE_PIGLIN_LOOK_AT_AGGRO_CHANCE_MAX = 70;
 }

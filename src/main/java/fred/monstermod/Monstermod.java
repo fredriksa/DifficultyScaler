@@ -1,11 +1,13 @@
 package fred.monstermod;
 
+import fred.monstermod.core.listeners.TicksUtil;
 import fred.monstermod.listeners.HordeSpawnerListener;
 import fred.monstermod.listeners.OverworldMobSpawnSpeedAdderListener;
 import fred.monstermod.general.PhaseChangedAdverter;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.listeners.UndergroundMobSpawnSpeedAdderListener;
 import fred.monstermod.listeners.*;
+import fred.monstermod.runnables.LookingAtPiglinStarterRunnable;
 import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
@@ -54,5 +56,7 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new SkeletonDodgeArrowListener(), this);
         pluginManager.registerEvents(new SuperChargedCreeperListener(), this);
         pluginManager.registerEvents(new LeapingSpiderListener(), this);
+
+        new LookingAtPiglinStarterRunnable().runTaskTimer(this, 0, TicksUtil.secondsToTicks(1));
     }
 }
