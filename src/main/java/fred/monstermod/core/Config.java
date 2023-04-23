@@ -9,7 +9,7 @@ public class Config {
     public static final int ZOMBIE_HORDE_MAX_CHANCE = 20;
 
     // How much the difficulty increases for each additional player online (0.25 = 25%)
-    public static final double DIFFICULTY_MODIFIER_PER_PLAYER = 0.25;
+    public static final double DIFFICULTY_MODIFIER_PER_PLAYER = 0.50; //0.25
 
     // Chance for having mobs underground spawn with increased movement speed
     public static final int MOB_SPEED_ADD_UNDERGROUND_MIN_CHANCE = 5;

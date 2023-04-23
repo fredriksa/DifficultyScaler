@@ -45,8 +45,9 @@ public class Modifiers {
         List<Integer> zeroSpawnMod = Arrays.asList(0,0,0,0,0,0,0);
         List<Integer> halfDefaultSpawnMod = Arrays.asList(2,2,3,3,4,4,5);
         List<Integer> defaultSpawnMod = Arrays.asList(3,4,5,6,6,7,7);
+        List<Integer> zombieSpawnMod = Arrays.asList(4,5,6,7,7,8,8);
 
-        spawn.put(EntityType.ZOMBIE, defaultSpawnMod);
+        spawn.put(EntityType.ZOMBIE, zombieSpawnMod);
         spawn.put(EntityType.SKELETON, defaultSpawnMod);
         spawn.put(EntityType.GHAST, halfDefaultSpawnMod);
         spawn.put(EntityType.ELDER_GUARDIAN, halfDefaultSpawnMod);
@@ -62,7 +63,7 @@ public class Modifiers {
         spawn.put(EntityType.ZOMBIFIED_PIGLIN, defaultSpawnMod);
         spawn.put(EntityType.ENDERMAN, halfDefaultSpawnMod);
         spawn.put(EntityType.CAVE_SPIDER, defaultSpawnMod);
-        spawn.put(EntityType.SILVERFISH, halfDefaultSpawnMod);
+        spawn.put(EntityType.SILVERFISH, zeroSpawnMod);
         spawn.put(EntityType.BLAZE, defaultSpawnMod);
         spawn.put(EntityType.MAGMA_CUBE, defaultSpawnMod);
         spawn.put(EntityType.ENDER_DRAGON, zeroSpawnMod);
@@ -81,7 +82,7 @@ public class Modifiers {
         spawn.put(EntityType.PIGLIN, defaultSpawnMod);
         spawn.put(EntityType.STRIDER, defaultSpawnMod);
         spawn.put(EntityType.ZOGLIN, defaultSpawnMod);
-        spawn.put(EntityType.PIGLIN_BRUTE, halfDefaultSpawnMod);
+        spawn.put(EntityType.PIGLIN_BRUTE, defaultSpawnMod);
         spawn.put(EntityType.WARDEN, zeroSpawnMod);
     }
 }

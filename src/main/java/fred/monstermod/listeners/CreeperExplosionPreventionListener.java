@@ -12,7 +12,11 @@ public class CreeperExplosionPreventionListener implements Listener {
     {
         if (event.getEntityType() == EntityType.CREEPER)
         {
-            event.blockList().clear();
+            final boolean isInOpenWorld = event.getLocation().getBlock().getLightFromSky() > 0;
+            if (isInOpenWorld)
+            {
+                event.blockList().clear();
+            }
         }
     }
 }
