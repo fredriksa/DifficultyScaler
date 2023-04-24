@@ -58,4 +58,8 @@ public class Config {
 
     public static final int ZOMBIE_PIGLIN_LOOK_AT_AGGRO_CHANCE_MIN = 40;
     public static final int ZOMBIE_PIGLIN_LOOK_AT_AGGRO_CHANCE_MAX = 70;
+
+    public static final int SERVER_SHUTDOWN_TIMER_MINUTES = 90;
+    public static final int SERVER_SHUTDOWN_ANNOUNCE_EVERY_X_MINUTE_BEFORE = 30;
+    public static final int SERVER_SHUTDOWN_ANNOUNCE_EVERY_MINUTE_X_MINUTES_BEFORE = 5;
 }

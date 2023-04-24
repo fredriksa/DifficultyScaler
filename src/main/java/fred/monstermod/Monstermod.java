@@ -21,8 +21,10 @@ public final class Monstermod extends JavaPlugin {
 
         registerEvents();
 
+        // 20 ticks on server per second. 20L * 3L = every 3 seconds.
         PluginRegistry.Instance().timeTracker.runTaskTimer(this, 0, 20L * 3L);
         PluginRegistry.Instance().timeTracker.listen(new PhaseChangedAdverter());
+        PluginRegistry.Instance().shutdownRunnable.runTaskTimer(this, 0, 20 * 60);
     }
 
     @Override
