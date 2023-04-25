@@ -58,6 +58,7 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new SkeletonDodgeArrowListener(), this);
         pluginManager.registerEvents(new SuperChargedCreeperListener(), this);
         pluginManager.registerEvents(new LeapingSpiderListener(), this);
+        pluginManager.registerEvents(new VoteCommandListener(), this);
 
         new LookingAtPiglinStarterRunnable().runTaskTimer(this, 0, TicksUtil.secondsToTicks(1));
     }

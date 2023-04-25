@@ -11,7 +11,6 @@ public class PluginRegistry {
     public final TimeTrackerRunnable timeTracker = new TimeTrackerRunnable();
     public final Modifiers modifiers = new Modifiers();
     public final AcidRainListener acidRain = new AcidRainListener();
-
     public final ServerShutdownRunnable shutdownRunnable = new ServerShutdownRunnable();
 
     public Monstermod monsterMod;
