@@ -75,7 +75,7 @@ public class Modifiers {
         spawn.put(EntityType.SHULKER, halfDefaultSpawnMod);
         spawn.put(EntityType.POLAR_BEAR, defaultSpawnMod);
         spawn.put(EntityType.PHANTOM, defaultSpawnMod);
-        spawn.put(EntityType.DROWNED, defaultSpawnMod);
+        spawn.put(EntityType.DROWNED, halfDefaultSpawnMod);
         spawn.put(EntityType.PILLAGER, defaultSpawnMod);
         spawn.put(EntityType.RAVAGER, defaultSpawnMod);
         spawn.put(EntityType.HOGLIN, halfDefaultSpawnMod);

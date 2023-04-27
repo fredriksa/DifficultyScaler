@@ -42,4 +42,12 @@ public class RandomUtil {
         final double candidate =  nextDouble * max;
         return Math.max(min, candidate);
     }
+
+    // Note: This function should replace the random function above.
+    // Reason: random function above only results in positive numbers.
+    public static double randomNegative(int min, int max)
+    {
+        Random random = new Random();
+        return random.nextDouble() * (max - min) + min;
+    }
 }

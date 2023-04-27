@@ -1,5 +1,6 @@
 package fred.monstermod;
 
+import fred.monstermod.core.Config;
 import fred.monstermod.core.listeners.TicksUtil;
 import fred.monstermod.listeners.HordeSpawnerListener;
 import fred.monstermod.listeners.OverworldMobSpawnSpeedAdderListener;
@@ -25,6 +26,7 @@ public final class Monstermod extends JavaPlugin {
         PluginRegistry.Instance().timeTracker.runTaskTimer(this, 0, 20L * 3L);
         PluginRegistry.Instance().timeTracker.listen(new PhaseChangedAdverter());
         PluginRegistry.Instance().shutdownRunnable.runTaskTimer(this, 0, 20 * 60);
+        PluginRegistry.Instance().meteorRain.runTaskTimer(this, 0, Config.METEOR_BATCH_SPAWN_FREQUENCY_TICKS);
     }
 
     @Override
@@ -60,7 +62,11 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new LeapingSpiderListener(), this);
         pluginManager.registerEvents(new VoteCommandListener(), this);
         pluginManager.registerEvents(new SaplingPlantListener(), this);
-        //pluginManager.registerEvents(new SkeletonArrowSprayListener(), this);
+
+        if (Config.METEOR_RAIN_ENABLED)
+        {
+            pluginManager.registerEvents(PluginRegistry.Instance().meteorRain, this);
+        }
 
         new LookingAtPiglinStarterRunnable().runTaskTimer(this, 0, TicksUtil.secondsToTicks(1));
     }
