@@ -62,4 +62,6 @@ public class Config {
     public static final int SERVER_SHUTDOWN_TIMER_MINUTES = 90;
     public static final int SERVER_SHUTDOWN_ANNOUNCE_EVERY_X_MINUTE_BEFORE = 30;
     public static final int SERVER_SHUTDOWN_ANNOUNCE_EVERY_MINUTE_X_MINUTES_BEFORE = 5;
+
+    public static final int PLANT_SAPLING_ON_TREE_LOG_BROKEN_CHANCE = 50;
 }
