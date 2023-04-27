@@ -6,8 +6,8 @@ import org.bukkit.ChatColor;
 import org.bukkit.World;
 
 public class DaytimeVoteSession extends VoteSession {
-    public DaytimeVoteSession(String _name, String _command) {
-        super(_name, _command);
+    public DaytimeVoteSession(String _name, String _command, String _autoCommand) {
+        super(_name, _command, _autoCommand);
     }
 
     private final int SUNSET = 13000;

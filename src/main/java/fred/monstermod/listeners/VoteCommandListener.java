@@ -18,8 +18,8 @@ public class VoteCommandListener implements Listener {
 
     public VoteCommandListener()
     {
-        activeSessions.add(new RestartVoteSession("server restart", "!restart"));
-        activeSessions.add(new DaytimeVoteSession("daytime", "!day"));
+        activeSessions.add(new RestartVoteSession("server restart", "!restart", ""));
+        activeSessions.add(new DaytimeVoteSession("daytime", "!day", "!auto day"));
     }
 
     @EventHandler
@@ -30,6 +30,10 @@ public class VoteCommandListener implements Listener {
             if (event.getMessage().equals(voteSession.command))
             {
                 voteSession.vote(event.getPlayer().getName());
+            }
+            else if (!voteSession.autoCommand.isEmpty() && event.getMessage().equals(voteSession.autoCommand))
+            {
+                voteSession.autoVote(event.getPlayer().getName());
             }
         }
     }
