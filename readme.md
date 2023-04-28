@@ -15,6 +15,10 @@ Current vote sessions enabled:
 - Daytime (!day or !auto day)
 - Restart (!restart)
 
+## Automated Restarts
+
+- Server automatically restarts to prevent lag from increased number of mobs.
+
 ## General Difficulty Scaling
 
 All systems that increase the difficulty of the world scale with the number of players online. 
@@ -96,3 +100,7 @@ If a player is struck by a meteor, the player will take damage and be launched a
 
 - Do not damage other drowned with thrown tridents.
 - Have an increased chance of dropping a trident on death.
+
+### Piglin
+
+- Looking at a piglin in the Nether has a chance to make all nether piglins become hostile. Avoid eye contact at all costs.
