@@ -49,6 +49,10 @@ If a player is struck by a meteor, the player will take damage and be launched a
 
 - When destroying a tree, there is a chance for saplings to automatically be planted at the broken block location. This prevents deforestation of the server.
 
+## Torch placement restriction
+
+- Ordinary torches can not be placed at a certain depth but instead redstone torches must be used.
+
 ## Monster spawner
 
 - Monster spawns have a chance of dropping as a pickable block when destroyed by a silk-touch enchanted pickaxe.
