@@ -51,7 +51,7 @@ If a player is struck by a meteor, the player will take damage and be launched a
 
 ## Monster Changes
 
-## General
+### General
 
 - Dynamically increase the number of monster spawns based on the current server phase.
 
