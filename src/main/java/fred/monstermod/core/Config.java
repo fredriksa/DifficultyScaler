@@ -83,6 +83,7 @@ public class Config {
 
     public static final int METEOR_RAIN_MIN_LENGTH_SECONDS = 90;
     public static final int METEOR_RAIN_MAX_LENGTH_SECONDS = 120;
+    public static final int METEOR_RAIN_INITIAL_DELAY_SECONDS = 180;
     public static final int METEOR_RAIN_DELAY_SECONDS = 2700;
     public static final int METEOR_RAIN_TRY_ACTIVATE_EVERY_X_SECONDS = 600;
 

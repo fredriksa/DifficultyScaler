@@ -29,7 +29,7 @@ public final class Monstermod extends JavaPlugin {
         PluginRegistry.Instance().timeTracker.runTaskTimer(this, 0, 20L * 3L);
         PluginRegistry.Instance().timeTracker.listen(new PhaseChangedAdverter());
         PluginRegistry.Instance().shutdownRunnable.runTaskTimer(this, 0, 20 * 60);
-        PluginRegistry.Instance().meteorRain.runTaskTimer(this, 0, Config.METEOR_BATCH_SPAWN_FREQUENCY_TICKS);
+        PluginRegistry.Instance().meteorRain.runTaskTimer(this, TicksUtil.secondsToTicks(Config.METEOR_RAIN_INITIAL_DELAY_SECONDS), Config.METEOR_BATCH_SPAWN_FREQUENCY_TICKS);
     }
 
     @Override
