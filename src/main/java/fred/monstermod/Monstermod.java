@@ -10,6 +10,7 @@ import fred.monstermod.listeners.UndergroundMobSpawnSpeedAdderListener;
 import fred.monstermod.listeners.*;
 import fred.monstermod.runnables.LookingAtPiglinStarterRunnable;
 import org.bukkit.Bukkit;
+import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -20,9 +21,11 @@ public final class Monstermod extends JavaPlugin {
         Bukkit.getLogger().info("MonsterMod onEnable()");
         PluginRegistry.Instance().monsterMod = this;
 
-        registerEvents();
+        PluginRegistry.Instance().voteSessionListener.onEnable();
 
+        registerEvents();
         // 20 ticks on server per second. 20L * 3L = every 3 seconds.
+
         PluginRegistry.Instance().timeTracker.runTaskTimer(this, 0, 20L * 3L);
         PluginRegistry.Instance().timeTracker.listen(new PhaseChangedAdverter());
         PluginRegistry.Instance().shutdownRunnable.runTaskTimer(this, 0, 20 * 60);
@@ -32,6 +35,8 @@ public final class Monstermod extends JavaPlugin {
     @Override
     public void onDisable() {
         Bukkit.getLogger().info("MonsterMod onDisable()");
+
+        PluginRegistry.Instance().voteSessionListener.onDisable();
     }
 
     private void registerEvents()
@@ -60,7 +65,7 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new SkeletonDodgeArrowListener(), this);
         pluginManager.registerEvents(new SuperChargedCreeperListener(), this);
         pluginManager.registerEvents(new LeapingSpiderListener(), this);
-        pluginManager.registerEvents(new VoteCommandListener(), this);
+        pluginManager.registerEvents(PluginRegistry.Instance().voteSessionListener, this);
         pluginManager.registerEvents(new SaplingPlantListener(), this);
         pluginManager.registerEvents(new NearbyEntitiesCommandListener(),  this);
         pluginManager.registerEvents(new MinecartSpeedListener(), this);

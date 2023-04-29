@@ -8,7 +8,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
 import java.util.HashSet;
-import java.util.Objects;
 
 public class VoteSession
 {
@@ -48,13 +47,11 @@ public class VoteSession
 
     public void vote(String playerName)
     {
-        clearOfflinePlayers();
-
         if (!votedPlayers.contains(playerName))
         {
             votedPlayers.add(playerName);
 
-            if (votedPlayers.size() == requiredVotes())
+            if (currentVotes() == requiredVotes())
             {
                 VotePassed(playerName);
             }
@@ -63,7 +60,7 @@ public class VoteSession
                 VoteAdded(playerName);
             }
         }
-        else if (votedPlayers.size() == requiredVotes())
+        else if (currentVotes() == requiredVotes())
         {
             VotePassed(playerName);
         }
@@ -71,6 +68,12 @@ public class VoteSession
         {
             AlreadyVoted(playerName);
         }
+    }
+
+    public void TriggerAutoVote(String playerName)
+    {
+        autoVotedPlayers.add(playerName);
+        votedPlayers.add(playerName);
     }
 
     public void OnVotePassed()
@@ -102,7 +105,6 @@ public class VoteSession
             BukkitRunnable runnable = new BukkitRunnable() {
                 @Override
                 public void run() {
-                    String capitalizedName = name.substring(0, 1).toUpperCase() + name.substring(1);
                     OnVotePassed();
                     AfterVotePassed();
                 }
@@ -110,6 +112,21 @@ public class VoteSession
 
             runnable.runTaskLater(PluginRegistry.Instance().monsterMod, 20L * 15L);
         }
+    }
+
+    private int currentVotes()
+    {
+        int votes = 0;
+
+        for (String playerName : votedPlayers)
+        {
+            if (Bukkit.getPlayer(playerName) != null)
+            {
+                votes++;
+            }
+        }
+
+        return votes;
     }
 
     private void VoteAdded(String playerName)
@@ -132,26 +149,7 @@ public class VoteSession
         player.sendMessage(ChatColor.RED + message);
     }
 
-    private void clearOfflinePlayers()
-    {
-        for (String playerName : votedPlayers)
-        {
-            Player player = Bukkit.getPlayer(playerName);
-            if (player == null)
-            {
-                votedPlayers.remove(playerName);
-            }
-        }
-
-        for (String playerName : autoVotedPlayers)
-        {
-            Player player = Bukkit.getPlayer(playerName);
-            if (player == null)
-            {
-                autoVotedPlayers.remove(playerName);
-            }
-        }
-    }
+    public HashSet<String> getAutoVotedPlayers() { return autoVotedPlayers; }
 
     private int remainingVotesRequired()
     {

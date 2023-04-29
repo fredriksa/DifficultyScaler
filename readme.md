@@ -9,6 +9,7 @@ Also introduces a set of new mechanics that increases the challenge of staying a
 ## Server-wide voting
 
 Players can vote for different things to happen to the server and world. For a vote to pass, all players online must have voted on the same vote session. A vote session is e.g. voting for daytime or server restart. It is possible to auto-vote on some vote sessions. If you have auto-vote enabled on a session, any player can perform an ordinary vote to trigger the vote to pass. You will then automatically be counted as a voted player.
+Auto voting is persistent across server-restarts.
 
 Current vote sessions enabled:
 
@@ -56,6 +57,10 @@ If a player is struck by a meteor, the player will take damage and be launched a
 ## Monster spawner
 
 - Monster spawns have a chance of dropping as a pickable block when destroyed by a silk-touch enchanted pickaxe.
+
+## Powered Rails
+
+- Increased speedup per power rail.
 
 ## Monster Changes
 
