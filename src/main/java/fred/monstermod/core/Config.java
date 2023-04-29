@@ -63,11 +63,12 @@ public class Config {
     public static final int SERVER_SHUTDOWN_ANNOUNCE_EVERY_X_MINUTE_BEFORE = 30;
     public static final int SERVER_SHUTDOWN_ANNOUNCE_EVERY_MINUTE_X_MINUTES_BEFORE = 5;
 
-    public static final int PLANT_SAPLING_ON_TREE_LOG_BROKEN_CHANCE = 50;
+    public static final int PLANT_SAPLING_ON_TREE_LOG_BROKEN_CHANCE = 90;
 
     public static final boolean METEOR_RAIN_ENABLED = true;
 
-    public static final int METEOR_DAMAGE = 2;
+    public static final int METEOR_DAMAGE = 3;
+    public static final int METEOR_FIRE_SECONDS = 7;
     public static final int METEOR_KNOCKBACK_POWER_XZ = 23;
     public static final int METEOR_KNOCKBACK_POWER_Y = 1;
     public static final int METEOR_KNOCKBACK_RADIUS = 7;
@@ -77,14 +78,19 @@ public class Config {
     public static final int METEOR_VELOCITY_SPREAD = 2;
     public static final int METEOR_STOP_SPAWNING_PLAYER_UNDERGROUND_Y_DIFF = 20;
 
-    public static final int METEOR_RAIN_START_MIN_CHANCE = 5;
-    public static final int METEOR_RAIN_START_MAX_CHANCE = 10;
+    public static final int METEOR_RAIN_START_MIN_CHANCE = 7;
+    public static final int METEOR_RAIN_START_MAX_CHANCE = 15;
 
     public static final int METEOR_RAIN_MIN_LENGTH_SECONDS = 90;
     public static final int METEOR_RAIN_MAX_LENGTH_SECONDS = 120;
-    public static final int METEOR_RAIN_DELAY_SECONDS = 5400;
+    public static final int METEOR_RAIN_DELAY_SECONDS = 2700;
     public static final int METEOR_RAIN_TRY_ACTIVATE_EVERY_X_SECONDS = 600;
 
     public static final int METEOR_BATCH_SPAWN_FREQUENCY_TICKS = 10;
     public static final int METEORS_PER_PLAYER_PER_BATCH = 3;
+
+    public static final float MINECART_MAX_SPEED_MODIFIER = 1;
+    public static final float MINECART_ACTIVATOR_RAIL_SPEED_BOOST = 2f;
+
+    public static final String SERVER_OWNER_USERNAME = "Fredkan";
 }

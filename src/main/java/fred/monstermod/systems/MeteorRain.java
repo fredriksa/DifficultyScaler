@@ -4,6 +4,8 @@ import fred.monstermod.core.Config;
 import fred.monstermod.core.MessageUtil;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.core.RandomUtil;
+import fred.monstermod.core.listeners.TicksUtil;
+import fred.monstermod.general.VoteSession;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.FallingBlock;
@@ -12,6 +14,8 @@ import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
 import org.bukkit.event.entity.EntityChangeBlockEvent;
+import org.bukkit.event.player.AsyncPlayerChatEvent;
+import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.RayTraceResult;
 import org.bukkit.util.Vector;
@@ -53,6 +57,8 @@ public class MeteorRain extends BukkitRunnable implements Listener {
 
     private void TryActivate()
     {
+        if (IsActive) return;
+
         if (lastTryActivateInstant != null)
         {
             Instant now = Instant.now();
@@ -155,35 +161,7 @@ public class MeteorRain extends BukkitRunnable implements Listener {
                 world.spawnParticle(Particle.EXPLOSION_HUGE, explosionLocation, 3);
                 world.createExplosion(explosionLocation, 0, false, false);
 
-                float xzPower = Config.METEOR_KNOCKBACK_POWER_XZ;
-                float yPower = Config.METEOR_KNOCKBACK_POWER_Y;
-
-                // Calculate the knockback for each player within a certain radius of the explosion
-                int radius = Config.METEOR_KNOCKBACK_RADIUS;
-
-                for (Player player : Bukkit.getServer().getOnlinePlayers()) {
-                    Location playerLocation = player.getLocation();
-                    double distance = explosionLocation.distance(playerLocation);
-
-                    if (distance <= radius) {
-                        Vector direction = playerLocation.toVector().subtract(explosionLocation.toVector()).normalize();
-                        RayTraceResult result = world.rayTraceBlocks(explosionLocation, direction, radius);
-
-                        if (result != null && result.getHitBlock() != null) {
-                            continue;
-                        }
-
-                        double knockback = (1.0 - (distance / radius)) * xzPower;
-                        direction.multiply(knockback);
-
-                        Vector playerVelocity = player.getVelocity();
-                        playerVelocity.setX(playerVelocity.getX() + direction.getX());
-                        playerVelocity.setY(playerVelocity.getY() + yPower);
-                        playerVelocity.setZ(playerVelocity.getZ() + direction.getZ());
-                        player.setVelocity(playerVelocity);
-                        player.damage(Config.METEOR_DAMAGE);
-                    }
-                }
+                explodePlayers(explosionLocation);
 
                 Block realBlock = event.getBlock();
                 realBlock.setType(Material.AIR);
@@ -199,5 +177,58 @@ public class MeteorRain extends BukkitRunnable implements Listener {
 
         event.setCancelled(true);
         event.setDropItems(false);
+    }
+
+    private void explodePlayers(Location explosionLocation)
+    {
+        final float xzPower = Config.METEOR_KNOCKBACK_POWER_XZ;
+        final float yPower = Config.METEOR_KNOCKBACK_POWER_Y;
+        final int radius = Config.METEOR_KNOCKBACK_RADIUS;
+
+        World explosionWorld = explosionLocation.getWorld();
+        for (Player player : Bukkit.getServer().getOnlinePlayers()) {
+            if (!player.getWorld().equals(explosionWorld)) continue;
+
+            Location playerLocation = player.getLocation();
+            double distance = explosionLocation.distance(playerLocation);
+
+            if (distance <= radius) {
+                Vector direction = playerLocation.toVector().subtract(explosionLocation.toVector()).normalize();
+                RayTraceResult result = explosionWorld.rayTraceBlocks(explosionLocation, direction, radius);
+
+                if (result != null && result.getHitBlock() != null) {
+                    continue;
+                }
+
+                double knockback = (1.0 - (distance / radius)) * xzPower;
+                direction.multiply(knockback);
+
+                Vector playerVelocity = player.getVelocity();
+                playerVelocity.setX(playerVelocity.getX() + direction.getX());
+                playerVelocity.setY(playerVelocity.getY() + yPower);
+                playerVelocity.setZ(playerVelocity.getZ() + direction.getZ());
+                player.setVelocity(playerVelocity);
+                player.damage(Config.METEOR_DAMAGE);
+                player.setFireTicks(TicksUtil.secondsToTicks(Config.METEOR_FIRE_SECONDS));
+            }
+        }
+    }
+
+
+    @EventHandler
+    public void OnChat(AsyncPlayerChatEvent event)
+    {
+        if (!event.getPlayer().getName().equals(Config.SERVER_OWNER_USERNAME)) return;
+
+        if (event.getMessage().equals("!meteorrain"))
+        {
+            event.getPlayer().sendMessage("Meteorrain command registered.");
+            if (!IsActive)
+            {
+                Activate();
+            }
+
+            event.setCancelled(true);
+        }
     }
 }
