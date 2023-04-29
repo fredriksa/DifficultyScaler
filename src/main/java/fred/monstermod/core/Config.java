@@ -11,6 +11,9 @@ public class Config {
     // How much the difficulty increases for each additional player online (0.25 = 25%)
     public static final double DIFFICULTY_MODIFIER_PER_PLAYER = 0.50; //0.25
 
+    public static final double MONSTER_DAMAGE_INCREASE_PER_PLAYER = 0.10;
+    public static final float MONSTER_DAMAGE_DEFAULT_INREASE = 1.5f;
+
     // Chance for having mobs underground spawn with increased movement speed
     public static final int MOB_SPEED_ADD_UNDERGROUND_MIN_CHANCE = 5;
     public static final int MOB_SPEED_ADD_UNDERGROUND_MAX_CHANCE = 35;

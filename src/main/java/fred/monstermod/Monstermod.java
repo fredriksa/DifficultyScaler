@@ -69,6 +69,7 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new SaplingPlantListener(), this);
         pluginManager.registerEvents(new NearbyEntitiesCommandListener(),  this);
         pluginManager.registerEvents(new MinecartSpeedListener(), this);
+        pluginManager.registerEvents(new EntityDamageListener(), this);
 
         if (Config.METEOR_RAIN_ENABLED)
         {

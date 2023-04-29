@@ -40,12 +40,26 @@ public class Modifiers {
         }
     }
 
+    private void multiply(List<Integer> list, float modifier)
+    {
+        for (int i = 0; i < list.size(); i++)
+        {
+            int newNum = (int) Math.ceil(list.get(i) * modifier);
+            list.set(i, newNum);
+        }
+    }
+
     private void addSpawnModifiers()
     {
         List<Integer> zeroSpawnMod = Arrays.asList(0,0,0,0,0,0,0);
         List<Integer> halfDefaultSpawnMod = Arrays.asList(2,2,3,3,4,4,5);
         List<Integer> defaultSpawnMod = Arrays.asList(3,4,5,6,6,7,7);
         List<Integer> zombieSpawnMod = Arrays.asList(4,5,6,7,7,8,8);
+
+        final float modifier = 0.5f;
+        multiply(halfDefaultSpawnMod, modifier);
+        multiply(defaultSpawnMod, modifier);
+        multiply(zombieSpawnMod, modifier);
 
         spawn.put(EntityType.ZOMBIE, zombieSpawnMod);
         spawn.put(EntityType.SKELETON, defaultSpawnMod);

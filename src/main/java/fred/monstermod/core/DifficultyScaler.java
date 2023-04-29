@@ -6,9 +6,14 @@ public class DifficultyScaler {
 
     public static double scaleWithPlayers(double value)
     {
+        return scaleWithPlayers(value, Config.DIFFICULTY_MODIFIER_PER_PLAYER);
+    }
+
+    public static double scaleWithPlayers(double value, double scaler)
+    {
         final int numberOfPlayers = Bukkit.getOnlinePlayers().size();
         final int playerScaler = Math.max(0, numberOfPlayers - 1);
-        final double playerModifier = 1 + (playerScaler * Config.DIFFICULTY_MODIFIER_PER_PLAYER);
+        final double playerModifier = 1 + (playerScaler * scaler);
         final double scaledValue = value * playerModifier;
         return scaledValue;
     }

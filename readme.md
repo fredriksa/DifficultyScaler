@@ -67,6 +67,7 @@ If a player is struck by a meteor, the player will take damage and be launched a
 ### General
 
 - Dynamically increase the number of monster spawns based on the current server phase.
+- Dynamically increase the monster damage based on the number of people online.
 
 - A subset of monsters spawning at the surface have their movement speed greatly increased. E.g. for zombies.
 
