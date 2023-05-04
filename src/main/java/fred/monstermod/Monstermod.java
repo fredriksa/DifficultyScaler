@@ -9,8 +9,8 @@ import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.listeners.UndergroundMobSpawnSpeedAdderListener;
 import fred.monstermod.listeners.*;
 import fred.monstermod.runnables.LookingAtPiglinStarterRunnable;
+import fred.monstermod.systems.ReviveSystem;
 import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 
@@ -29,7 +29,7 @@ public final class Monstermod extends JavaPlugin {
         PluginRegistry.Instance().timeTracker.runTaskTimer(this, 0, 20L * 3L);
         PluginRegistry.Instance().timeTracker.listen(new PhaseChangedAdverter());
         PluginRegistry.Instance().shutdownRunnable.runTaskTimer(this, 0, 20 * 60);
-        PluginRegistry.Instance().meteorRain.runTaskTimer(this, TicksUtil.secondsToTicks(Config.METEOR_RAIN_INITIAL_DELAY_SECONDS), Config.METEOR_BATCH_SPAWN_FREQUENCY_TICKS);
+        PluginRegistry.Instance().meteorRainSystem.runTaskTimer(this, TicksUtil.secondsToTicks(Config.METEOR_RAIN_INITIAL_DELAY_SECONDS), Config.METEOR_BATCH_SPAWN_FREQUENCY_TICKS);
     }
 
     @Override
@@ -71,9 +71,14 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new MinecartSpeedListener(), this);
         pluginManager.registerEvents(new EntityDamageListener(), this);
 
+        if (Config.REVIVE_SYSTEM_ENABLED)
+        {
+            pluginManager.registerEvents(new ReviveSystem(), this);
+        }
+
         if (Config.METEOR_RAIN_ENABLED)
         {
-            pluginManager.registerEvents(PluginRegistry.Instance().meteorRain, this);
+            pluginManager.registerEvents(PluginRegistry.Instance().meteorRainSystem, this);
         }
 
         new LookingAtPiglinStarterRunnable().runTaskTimer(this, 0, TicksUtil.secondsToTicks(1));

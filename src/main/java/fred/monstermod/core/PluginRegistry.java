@@ -6,7 +6,7 @@ import fred.monstermod.listeners.AcidRainListener;
 import fred.monstermod.listeners.VoteSessionListener;
 import fred.monstermod.runnables.ServerShutdownRunnable;
 import fred.monstermod.runnables.TimeTrackerRunnable;
-import fred.monstermod.systems.MeteorRain;
+import fred.monstermod.systems.MeteorRainSystem;
 
 public class PluginRegistry {
 
@@ -14,7 +14,7 @@ public class PluginRegistry {
     public final Modifiers modifiers = new Modifiers();
     public final AcidRainListener acidRain = new AcidRainListener();
     public final ServerShutdownRunnable shutdownRunnable = new ServerShutdownRunnable();
-    public final MeteorRain meteorRain = new MeteorRain();
+    public final MeteorRainSystem meteorRainSystem = new MeteorRainSystem();
     public final VoteSessionListener voteSessionListener = new VoteSessionListener();
 
     public Monstermod monsterMod;

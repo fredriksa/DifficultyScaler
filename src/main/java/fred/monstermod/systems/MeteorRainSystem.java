@@ -5,7 +5,6 @@ import fred.monstermod.core.MessageUtil;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.core.RandomUtil;
 import fred.monstermod.core.listeners.TicksUtil;
-import fred.monstermod.general.VoteSession;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.FallingBlock;
@@ -22,7 +21,7 @@ import org.bukkit.util.Vector;
 import java.time.Duration;
 import java.time.Instant;
 
-public class MeteorRain extends BukkitRunnable implements Listener {
+public class MeteorRainSystem extends BukkitRunnable implements Listener {
 
     private boolean IsActive = false;
     private Instant lastActiveInstant = null;

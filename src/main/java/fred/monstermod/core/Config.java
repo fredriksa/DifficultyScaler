@@ -96,5 +96,11 @@ public class Config {
     public static final float MINECART_MAX_SPEED_MODIFIER = 1;
     public static final float MINECART_ACTIVATOR_RAIL_SPEED_BOOST = 2f;
 
+    public static final boolean REVIVE_SYSTEM_ENABLED = true;
+    public static final long REVIVE_COOLDOWN_SECONDS = 1800;
+    public static final float REVIVE_DAMAGE_PER_TICK = 1f;
+    public static final int REVIVE_DAMAGE_EVERY_X_SECONDS = 2;
+    public static final int REVIVE_PLAYER_NEARBY_DISTANCE = 75;
+
     public static final String SERVER_OWNER_USERNAME = "Fredkan";
 }

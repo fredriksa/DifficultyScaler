@@ -6,4 +6,9 @@ public class TicksUtil
     {
         return (int)(seconds * 20);
     }
+
+    public static long ticksToSeconds(long ticks)
+    {
+        return ticks / 20;
+    }
 }
