@@ -47,11 +47,12 @@ public class VoteSession
 
     public void vote(String playerName)
     {
+        MessageUtil.broadcast("Remaining votes required: " + remainingVotesRequired());
         if (!votedPlayers.contains(playerName))
         {
             votedPlayers.add(playerName);
 
-            if (currentVotes() == requiredVotes())
+            if (remainingVotesRequired() == 0)
             {
                 VotePassed(playerName);
             }
@@ -60,7 +61,7 @@ public class VoteSession
                 VoteAdded(playerName);
             }
         }
-        else if (currentVotes() == requiredVotes())
+        else if (remainingVotesRequired() == 0)
         {
             VotePassed(playerName);
         }
@@ -114,7 +115,7 @@ public class VoteSession
         }
     }
 
-    private int currentVotes()
+    private int currentOnlineVotes()
     {
         int votes = 0;
 
@@ -151,11 +152,7 @@ public class VoteSession
 
     public HashSet<String> getAutoVotedPlayers() { return autoVotedPlayers; }
 
-    private int remainingVotesRequired()
-    {
-        return requiredVotes() - votedPlayers.size();
-    }
-
+    private int remainingVotesRequired() { return requiredVotes() - currentOnlineVotes(); }
     private int requiredVotes()
     {
         return Bukkit.getOnlinePlayers().size();
