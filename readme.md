@@ -51,7 +51,7 @@ If a player is struck by a meteor, the player will take damage and be launched a
 When a player takes damage that would normally kill the player, the player will be given a second chance to survive by becoming "downed". When this happens, the player will be rooted in place, and a bleed out timer will start. When the player's health reaches zero, he or she will die.
 Disconnecting while downed will result in instantaneous death. This can only happen so often and requires another player to nearby for the downed event to occur.
 
-![](/images/laststand.jpeg)
+![](/images/laststand.jpeg | width=50)
 
 In the image above, a revivable player can be seen. 
 
