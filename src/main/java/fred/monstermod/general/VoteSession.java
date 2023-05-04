@@ -47,7 +47,6 @@ public class VoteSession
 
     public void vote(String playerName)
     {
-        MessageUtil.broadcast("Remaining votes required: " + remainingVotesRequired());
         if (!votedPlayers.contains(playerName))
         {
             votedPlayers.add(playerName);
