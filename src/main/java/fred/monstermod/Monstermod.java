@@ -8,6 +8,7 @@ import fred.monstermod.general.PhaseChangedAdverter;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.listeners.UndergroundMobSpawnSpeedAdderListener;
 import fred.monstermod.listeners.*;
+import fred.monstermod.raid.listeners.RaidCommandListener;
 import fred.monstermod.runnables.LookingAtPiglinStarterRunnable;
 import fred.monstermod.systems.ReviveSystem;
 import org.bukkit.Bukkit;
@@ -22,6 +23,7 @@ public final class Monstermod extends JavaPlugin {
         PluginRegistry.Instance().monsterMod = this;
 
         PluginRegistry.Instance().voteSessionListener.onEnable();
+        PluginRegistry.Instance().raid.onEnable();
 
         registerEvents();
         // 20 ticks on server per second. 20L * 3L = every 3 seconds.
@@ -37,6 +39,7 @@ public final class Monstermod extends JavaPlugin {
         Bukkit.getLogger().info("MonsterMod onDisable()");
 
         PluginRegistry.Instance().voteSessionListener.onDisable();
+        PluginRegistry.Instance().raid.onDisable();
     }
 
     private void registerEvents()
@@ -70,6 +73,8 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new NearbyEntitiesCommandListener(),  this);
         pluginManager.registerEvents(new MinecartSpeedListener(), this);
         pluginManager.registerEvents(new EntityDamageListener(), this);
+
+        pluginManager.registerEvents(new RaidCommandListener(), this);
 
         if (Config.REVIVE_SYSTEM_ENABLED)
         {

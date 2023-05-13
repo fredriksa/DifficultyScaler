@@ -15,6 +15,7 @@ public class EntityUtil {
 
         for (Player player : Bukkit.getOnlinePlayers()) {
             if (player.equals(target)) continue;
+            if (!player.getWorld().equals(target.getWorld())) continue;
 
             Location playerLocation = player.getLocation();
             Location targetLocation = target.getLocation();
@@ -38,6 +39,9 @@ public class EntityUtil {
         // Calculate the distance between each entity and the target location
         for (T entity : entities) {
             Location entityLocation = entity.getLocation();
+
+            if (!entity.getWorld().equals(location.getWorld())) continue;
+
             double distance = entityLocation.distance(location);
             distances.put(entity, distance);
         }

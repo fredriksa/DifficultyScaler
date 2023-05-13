@@ -100,7 +100,7 @@ public class Config {
     public static final long REVIVE_COOLDOWN_SECONDS = 1800;
     public static final float REVIVE_DAMAGE_PER_TICK = 1f;
     public static final int REVIVE_DAMAGE_EVERY_X_SECONDS = 2;
-    public static final int REVIVE_PLAYER_NEARBY_DISTANCE = 75;
+    public static final int REVIVE_PLAYER_NEARBY_DISTANCE = 150;
 
     public static final String SERVER_OWNER_USERNAME = "Fredkan";
 }

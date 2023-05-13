@@ -53,7 +53,6 @@ public class SpawnEventListener implements Listener {
         Bukkit.getServer().getPluginManager().callEvent(new AdditionalEntitySpawnGroupEvent(event));
 
         final double spawnModifierScaled = DifficultyScaler.scaleWithPlayers(spawnModifier.get());
-        Bukkit.getLogger().info("Spawning: " + spawnModifierScaled);
         for (int i = 0; i < spawnModifierScaled; i++)
         {
             World world = event.getLocation().getWorld();

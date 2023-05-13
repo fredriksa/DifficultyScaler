@@ -78,8 +78,8 @@ public class ReviveSystem implements Listener {
             return;
         }
 
-        player.setAllowFlight(false);
-        player.setFlying(false);
+        player.sendMessage(ChatColor.GREEN + "You have been downed. Another player can still save you.");
+
         event.setCancelled(true);
         player.setHealth(20);
 
@@ -226,7 +226,6 @@ public class ReviveSystem implements Listener {
         reviveTracker.trackRevive(player);
 
         player.setWalkSpeed(DEFAULT_WALK_SPEED);
-        player.setAllowFlight(true);
         player.removePotionEffect(PotionEffectType.INVISIBILITY);
 
         player.getPlayer().sendMessage(ChatColor.GREEN + "You have been revived. Next revive ready in " + TimeUtil.secondsToDateTimeString(Config.REVIVE_COOLDOWN_SECONDS) + ".");
