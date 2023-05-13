@@ -12,8 +12,11 @@ public class Raid implements Listener
     public RaidJoinHandler raidJoinHandler = new RaidJoinHandler(this);
     public RaidLeaveHandler raidLeaveHandler = new RaidLeaveHandler(this);
 
+    private RaidlessPlayerCleanup playerCleanup = new RaidlessPlayerCleanup();
+
     public void onEnable()
     {
+        playerCleanup.start();
         playerData.load();
         sessions.load();
     }

@@ -56,7 +56,10 @@ public class GenericRaidListeners implements Listener {
     {
         if (!event.getBlock().getWorld().getName().equals(RaidConfig.WORLD_NAME)) return;
 
-        if (event.getBlock().hasMetadata(RaidConfig.METADATAKEY_RAID_EXIT_CAMPFIRE))
+        RaidSession session = PluginRegistry.Instance().raid.sessions.getCurrentRaidSession(event.getPlayer());
+        if (session == null) return;
+
+        if (session.isExitBlock(event.getBlock()))
             event.setCancelled(true);
     }
 
@@ -65,17 +68,18 @@ public class GenericRaidListeners implements Listener {
     {
         if (!event.getPlayer().getWorld().getName().equals(RaidConfig.WORLD_NAME)) return;
 
+        RaidSession session = PluginRegistry.Instance().raid.sessions.getCurrentRaidSession(event.getPlayer());
+        if (session == null)
+        {
+            event.getPlayer().sendMessage(ChatColor.RED + "Server is unable to find your raid session. You can not exit.");
+            return;
+        }
+
         if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
             Block clickedBlock = event.getClickedBlock();
-            if (!clickedBlock.hasMetadata(RaidConfig.METADATAKEY_RAID_EXIT_CAMPFIRE))
-                return;
 
-            RaidSession session = PluginRegistry.Instance().raid.sessions.getCurrentRaidSession(event.getPlayer());
-            if (session == null)
-            {
-                event.getPlayer().sendMessage(ChatColor.RED + "Server is unable to find your raid session. You can not exit.");
+            if (!session.isExitBlock(clickedBlock))
                 return;
-            }
 
             session.leave(event.getPlayer());
             RaidUtils.teleportPlayerBack(event.getPlayer());

@@ -101,6 +101,11 @@ public class RequestRaidStartHandler {
 
         Player leader = Bukkit.getPlayer(session.getLeader());
         Location createExitPoint = createExitPoint(spawnLocation);
+
+        session.setExitX(createExitPoint.getX());
+        session.setExitY(createExitPoint.getY());
+        session.setExitZ(createExitPoint.getZ());
+
         giveExitPointCompass(leader, createExitPoint);
 
         session.activate(false);
@@ -161,8 +166,7 @@ public class RequestRaidStartHandler {
 
         Block exitPoint = highestBlock.getLocation().add(0, 4, 0).getBlock();
         exitPoint.setType(Material.CAMPFIRE);
-        exitPoint.setMetadata(RaidConfig.METADATAKEY_RAID_EXIT_CAMPFIRE, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, true));
 
-        return highestBlock.getLocation();
+        return exitPoint.getLocation();
     }
 }

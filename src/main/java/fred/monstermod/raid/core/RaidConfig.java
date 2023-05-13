@@ -12,7 +12,6 @@ public class RaidConfig {
     public static final String METADATAKEY_RAID_JOIN_Y = "RAID_JOIN_Y";
     public static final String METADATAKEY_RAID_JOIN_Z = "RAID_JOIN_Z";
     public static final String METADATAKEY_RAID_JOIN_WORLD = "RAID_JOIN_WORLD";
-    public static final String METADATAKEY_RAID_EXIT_CAMPFIRE = "RAID_EXIT_CAMPFIRE";
 
     public static final String COMPASS_ITEM_NAME = "Raid Exit Compass";
 }

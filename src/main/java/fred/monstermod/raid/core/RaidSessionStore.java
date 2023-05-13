@@ -20,6 +20,9 @@ public class RaidSessionStore {
     private final String statusProperty = "status";
     private final String playersProperty = "players";
     private final String elapsedActiveTimeProperty = "elapsedActiveTime";
+    private final String exitXProperty = "exitX";
+    private final String exitYProperty = "exitY";
+    private final String exitZProperty = "exitZ";
 
     public RaidSession getCurrentRaidSession(Player player)
     {
@@ -77,6 +80,9 @@ public class RaidSessionStore {
                 session.setLeader(UUID.fromString(raid.get(leaderProperty).getAsString()));
                 session.setStatus(RaidSessionStatus.valueOf(raid.get(statusProperty).getAsString()));
                 session.setElapsedActiveTime(raid.get(elapsedActiveTimeProperty).getAsLong());
+                session.setExitX(raid.get(exitXProperty).getAsDouble());
+                session.setExitY(raid.get(exitYProperty).getAsDouble());
+                session.setExitZ(raid.get(exitZProperty).getAsDouble());
 
                 JsonArray playersArray = raid.get(playersProperty).getAsJsonArray();
                 for (JsonElement element : playersArray)
@@ -116,6 +122,9 @@ public class RaidSessionStore {
             raidJson.addProperty(statusProperty, raidSession.getStatus().toString());
             raidJson.addProperty(leaderProperty, raidSession.getLeader().toString());
             raidJson.addProperty(elapsedActiveTimeProperty, raidSession.getElapsedActiveTime());
+            raidJson.addProperty(exitXProperty, raidSession.getExitX());
+            raidJson.addProperty(exitYProperty, raidSession.getExitY());
+            raidJson.addProperty(exitZProperty, raidSession.getExitZ());
 
             JsonArray playersJson = new JsonArray();
             for (UUID playerUuid : raidSession.getPlayers())

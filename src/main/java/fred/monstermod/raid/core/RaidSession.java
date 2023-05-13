@@ -5,6 +5,7 @@ import fred.monstermod.core.listeners.TicksUtil;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.World;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
@@ -24,6 +25,9 @@ public class RaidSession {
     // Name of leader of the raid session
     private UUID leader;
 
+    private double exitX;
+    private double exitY;
+    private double exitZ;
 
     private RaidTrackerRunnable raidTracker;
     private SessionEndHandler endHandler = new SessionEndHandler(this);
@@ -40,13 +44,19 @@ public class RaidSession {
     public HashSet<UUID> getPlayers() { return players; }
     public long getElapsedActiveTime() { return elapsedActiveTime; }
     public RaidTrackerRunnable getRaidTracker() { return raidTracker; }
+    public double getExitX() { return exitX; }
+    public double getExitY() { return exitY; }
+    public double getExitZ() { return exitZ; }
 
-    public void setLeader(UUID newLeader)  { leader = newLeader; }
-    public void setName(String newName) { name = newName; }
-    public void setUuid(UUID newUuid) { uuid = newUuid; }
-    public void setStatus(RaidSessionStatus newStatus) { status = newStatus; }
-    public void setElapsedActiveTime(long newElapsedActiveTime) { elapsedActiveTime = newElapsedActiveTime; }
-    public void setRaidTracker(RaidTrackerRunnable newRaidTrackerRunnable) { raidTracker = newRaidTrackerRunnable; }
+    public void setLeader(UUID leader)  { this.leader = leader; }
+    public void setName(String name) { this.name = name; }
+    public void setUuid(UUID Uuid) { this.uuid = Uuid; }
+    public void setStatus(RaidSessionStatus status) { this.status = status; }
+    public void setElapsedActiveTime(long elapsedActiveTime) { this.elapsedActiveTime = elapsedActiveTime; }
+    public void setRaidTracker(RaidTrackerRunnable raidTrackerrunnable) { this.raidTracker = raidTrackerrunnable; }
+    public void setExitX(double exitX) { this.exitX = exitX; }
+    public void setExitY(double exitY) { this.exitY = exitY; }
+    public void setExitZ(double exitZ) { this.exitZ = exitZ; }
 
     public void destroy()
     {
@@ -139,5 +149,10 @@ public class RaidSession {
     public void end()
     {
         endHandler.onEnd();
+    }
+
+    public boolean isExitBlock(Block block)
+    {
+        return block.getLocation().getX() == exitX && block.getLocation().getY() == exitY && block.getLocation().getZ() == exitZ;
     }
 }
