@@ -30,11 +30,11 @@ public class RaidTrackerRunnable extends BukkitRunnable {
         {
             if (session.getElapsedActiveTime() >= RaidConfig.RAID_TIME_LIMIT_SECONDS - RaidConfig.RAID_TIME_ANNOUNCE_EVERY_SECOND_BEFORE)
             {
-                MessageUtil.broadcast("Raid session ends in " + secondsUntilTimeOver + " seconds(s).");
+                session.broadcast("Raid session ends in " + secondsUntilTimeOver + " seconds(s).");
             }
             else if (session.getElapsedActiveTime() % RaidConfig.RAID_TIME_ANNOUNCE_EVERY_SECOND_BEFORE == 0)
             {
-                MessageUtil.broadcast("Raid session ends in " + secondsUntilTimeOver + " seconds(s).");
+                session.broadcast("Raid session ends in " + secondsUntilTimeOver + " seconds(s).");
             }
         }
 

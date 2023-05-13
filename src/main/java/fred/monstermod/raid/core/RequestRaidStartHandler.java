@@ -9,9 +9,12 @@ import fred.monstermod.raid.Raid;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
+import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.metadata.FixedMetadataValue;
 import org.bukkit.metadata.MetadataValue;
 
+import java.util.Random;
 import java.util.UUID;
 
 public class RequestRaidStartHandler {
@@ -96,6 +99,10 @@ public class RequestRaidStartHandler {
             member.sendMessage(ChatColor.GREEN + "You have been teleported to the raid location. Good luck and have fun!");
         }
 
+        Player leader = Bukkit.getPlayer(session.getLeader());
+        Location createExitPoint = createExitPoint(spawnLocation);
+        giveExitPointCompass(leader, createExitPoint);
+
         session.activate(false);
     }
 
@@ -118,5 +125,44 @@ public class RequestRaidStartHandler {
         final int RANDOM_Z = (int)RandomUtil.random(-RaidConfig.Z_SPREAD, RaidConfig.Z_SPREAD);
         Block block = BlockUtils.getHighestYBlock(raidWorld, RANDOM_X, RANDOM_Z);
         return block.getLocation();
+    }
+
+    private void giveExitPointCompass(Player player, Location pointTo)
+    {
+        ItemStack compass = new ItemStack(Material.COMPASS);
+
+        CompassMeta compassMeta = (CompassMeta)compass.getItemMeta();
+        compassMeta.setLodestone(pointTo);
+        compassMeta.setLodestoneTracked(false);
+        compassMeta.setDisplayName(RaidConfig.COMPASS_ITEM_NAME);
+
+        compass.setItemMeta(compassMeta);
+
+        player.getInventory().addItem(compass);
+        player.updateInventory();
+    }
+
+    private Location createExitPoint(Location spawnLocation)
+    {
+        Random random = new Random();
+        int xRand = random.nextInt(2);
+        int zRand = random.nextInt(2);
+
+        int xDistance = xRand == 0 ? 10 : -10;
+        int zDistance = zRand == 0 ? 10 : -10;
+
+        Block highestBlock = BlockUtils.getHighestYBlock(spawnLocation.getWorld(), (int) (spawnLocation.getX() + xDistance), (int) (spawnLocation.getZ() + zDistance));
+
+        highestBlock.getLocation().add(0, -1, 0).getBlock().setType(Material.SMOOTH_STONE);
+        highestBlock.setType(Material.SMOOTH_STONE);
+        highestBlock.getLocation().add(0, 1, 0).getBlock().setType(Material.SMOOTH_STONE);
+        highestBlock.getLocation().add(0, 2, 0).getBlock().setType(Material.SMOOTH_STONE);
+        highestBlock.getLocation().add(0, 3, 0).getBlock().setType(Material.SMOOTH_STONE);
+
+        Block exitPoint = highestBlock.getLocation().add(0, 4, 0).getBlock();
+        exitPoint.setType(Material.CAMPFIRE);
+        exitPoint.setMetadata(RaidConfig.METADATAKEY_RAID_EXIT_CAMPFIRE, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, true));
+
+        return highestBlock.getLocation();
     }
 }

@@ -89,14 +89,10 @@ public class RaidSession {
 
     public void activate(boolean loadedFromFile)
     {
-        Bukkit.getLogger().info("Activating #1 raid session: " + name);
-
         World raidWorld = Bukkit.getWorld(RaidConfig.WORLD_NAME);
         if (raidWorld == null) return;
 
         status = RaidSessionStatus.ACTIVE;
-
-        Bukkit.getLogger().info("Activating #2 raid session: " + name);
 
         RaidTrackerRunnable raidTracker = new RaidTrackerRunnable(this);
         raidTracker.runTaskTimer(PluginRegistry.Instance().monsterMod, 0, TicksUtil.secondsToTicks(1));

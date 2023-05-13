@@ -1,16 +1,34 @@
 package fred.monstermod.raid.listeners;
 
+import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.raid.core.RaidConfig;
-import org.bukkit.Bukkit;
+import fred.monstermod.raid.core.RaidSession;
+import fred.monstermod.raid.core.RaidUtils;
 import org.bukkit.ChatColor;
-import org.bukkit.World;
+import org.bukkit.Location;
+import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
+import org.bukkit.event.block.Action;
+import org.bukkit.event.block.BlockBreakEvent;
+import org.bukkit.event.entity.PlayerDeathEvent;
+import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerSpawnChangeEvent;
 
 public class GenericRaidListeners implements Listener {
+
+    @EventHandler
+    public void onPlayerDeath(PlayerDeathEvent event)
+    {
+        Player player = event.getEntity();
+        if (!player.getWorld().getName().equals(RaidConfig.WORLD_NAME)) return;
+
+        RaidSession session = PluginRegistry.Instance().raid.sessions.getCurrentRaidSession(player);
+        if (session == null) return;
+        session.leave(player);
+    }
 
     @EventHandler
     public void onPlayerRespawn(PlayerRespawnEvent event)
@@ -18,17 +36,9 @@ public class GenericRaidListeners implements Listener {
         Player player = event.getPlayer();
         if (!player.getWorld().getName().equals(RaidConfig.WORLD_NAME)) return;
 
-        if (player.hasMetadata(RaidConfig.METADATAKEY_RAID_JOIN_WORLD))
-        {
-            final String worldName = player.getMetadata(RaidConfig.METADATAKEY_RAID_JOIN_WORLD).get(0).asString();
-            World teleportBackToWorld = Bukkit.getWorld(worldName);
-
-            int x = player.getMetadata(RaidConfig.METADATAKEY_RAID_JOIN_X).get(0).asInt();
-            int y = player.getMetadata(RaidConfig.METADATAKEY_RAID_JOIN_Y).get(0).asInt();
-            int z = player.getMetadata(RaidConfig.METADATAKEY_RAID_JOIN_Z).get(0).asInt();
-
-            event.setRespawnLocation(teleportBackToWorld.getBlockAt(x,y,z).getLocation());
-        }
+        Location location = RaidUtils.playerTeleportBackLocation(player);
+        if (location == null) return;
+        event.setRespawnLocation(location);
     }
 
     @EventHandler
@@ -40,4 +50,38 @@ public class GenericRaidListeners implements Listener {
 
         player.sendMessage(ChatColor.RED + "You may not change your spawn point to the raid world. Nice try though!");
     }
+
+    @EventHandler
+    public void onBlockBreakEvent(BlockBreakEvent event)
+    {
+        if (!event.getBlock().getWorld().getName().equals(RaidConfig.WORLD_NAME)) return;
+
+        if (event.getBlock().hasMetadata(RaidConfig.METADATAKEY_RAID_EXIT_CAMPFIRE))
+            event.setCancelled(true);
+    }
+
+    @EventHandler
+    public void playerInteractEvent(PlayerInteractEvent event)
+    {
+        if (!event.getPlayer().getWorld().getName().equals(RaidConfig.WORLD_NAME)) return;
+
+        if (event.getAction() == Action.RIGHT_CLICK_BLOCK) {
+            Block clickedBlock = event.getClickedBlock();
+            if (!clickedBlock.hasMetadata(RaidConfig.METADATAKEY_RAID_EXIT_CAMPFIRE))
+                return;
+
+            RaidSession session = PluginRegistry.Instance().raid.sessions.getCurrentRaidSession(event.getPlayer());
+            if (session == null)
+            {
+                event.getPlayer().sendMessage(ChatColor.RED + "Server is unable to find your raid session. You can not exit.");
+                return;
+            }
+
+            session.leave(event.getPlayer());
+            RaidUtils.teleportPlayerBack(event.getPlayer());
+            event.getPlayer().sendMessage(ChatColor.GREEN + "You made it, congratulations!");
+        }
+    }
+
+    // Cancel breaking exit point block
 }
