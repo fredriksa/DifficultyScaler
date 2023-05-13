@@ -48,4 +48,12 @@ public class RaidUtils {
 
         player.updateInventory();
     }
+
+    public static boolean isInRaidWorld(Player player)
+    {
+        World playerWorld = player.getWorld();
+        if (playerWorld == null )  return false;
+
+        return playerWorld.getName().equals(RaidConfig.WORLD_NAME);
+    }
 }

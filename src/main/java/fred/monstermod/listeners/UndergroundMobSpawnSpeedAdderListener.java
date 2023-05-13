@@ -28,7 +28,7 @@ public class UndergroundMobSpawnSpeedAdderListener implements Listener {
     public void onAdditionalEntitySpawn(AdditionalEntitySpawnEvent event) {
         final Entity spawnedEntity = event.getEntity();
         final String worldName = spawnedEntity.getWorld().getName();
-        if (!worldName.equals("world") || !shouldMobHaveSpeedMod(spawnedEntity))
+        if (!Config.WORLDS_TO_MODIFY.contains(worldName) || !shouldMobHaveSpeedMod(spawnedEntity))
         {
             return;
         }

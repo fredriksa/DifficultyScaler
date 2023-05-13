@@ -2,6 +2,7 @@ package fred.monstermod.listeners;
 
 import fred.monstermod.core.Config;
 import fred.monstermod.core.DifficultyScaler;
+import fred.monstermod.raid.core.RaidConfig;
 import org.bukkit.Bukkit;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Monster;
@@ -72,6 +73,11 @@ public class EntityDamageListener implements Listener {
 
         double newDamage = entityToDamageModifier.get(monster.getType()) * event.getDamage();
         newDamage = DifficultyScaler.scaleWithPlayers(newDamage, Config.MONSTER_DAMAGE_INCREASE_PER_PLAYER);
+
+        if (event.getEntity().getWorld().getName().equals(RaidConfig.WORLD_NAME))
+        {
+            event.setDamage(newDamage * 2);
+        }
 
         event.setDamage(newDamage);
     }

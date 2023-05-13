@@ -6,6 +6,39 @@ Also introduces a set of new mechanics that increases the challenge of staying a
 
 # List of features
 
+## Raid Event
+
+# Raids
+
+Players are able to form raiding groups and go on raiding incursions into another world in search for treasure. Raids have a time limit, and before the time is up, players must have reached the exit location pointed to by the compass. Only the raid leader will spawn with the exit point compass, so make sure to follow the leader or else you will most likely not manage to locate the exit point.
+
+The exit point is unbreakable and can be identified by a campfire on-top of a stone tower. The exit point is always on the surface of the world. To exit, right click the campfire. All members of the raid team must be nearby or else exiting will fail. Upon exit, raid specific items are removed from the player's inventory, e.g. the leader's compass.
+
+![img](images/compass_raid.jpeg)
+
+Throughout the raid, the player will be notified of the remaining raid time on a 5 minutes interval. A countdown announcing every minute will begin when there is 5 minutes left.
+
+To enable adventuring, a restriction has been set for how many blocks a player can break within a raid. This restriction does not apply to valuable blocks such as iron ore. The idea is to restrict the power of strip mining while pushing the player to go towards cave exploration.
+
+Enemies will deal more damage during a raid. They are more likely to slow you as well. On top of that, zombies do not burn in daylight and other misc. modifications have been added to make the raid more exciting. As a reward, the player will valuables at an increased rate.
+
+Commands:
+
+- !raid join #name
+    - Joins (or creates) raid identified by #name. E.g. !raid join 123
+- !raid leave
+    - Leaves current raid. Leaving raid mid raid results in instantaneous death.
+- !raid start
+    - Starts the raid you are currently part of. Only the leader may start a raid.
+
+Good to know:
+
+- It's not possible to set a spawn location in the raid world.
+
+- Raids will never begin in a water location.
+
+
+
 ## Server-wide voting
 
 Players can vote for different things to happen to the server and world. For a vote to pass, all players online must have voted on the same vote session. A vote session is e.g. voting for daytime or server restart. It is possible to auto-vote on some vote sessions. If you have auto-vote enabled on a session, any player can perform an ordinary vote to trigger the vote to pass. You will then automatically be counted as a voted player.

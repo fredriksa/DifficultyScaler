@@ -1,5 +1,6 @@
 package fred.monstermod.listeners;
 
+import fred.monstermod.core.Config;
 import fred.monstermod.events.AdditionalEntitySpawnEvent;
 import org.bukkit.entity.Entity;
 import org.bukkit.entity.EntityType;
@@ -25,7 +26,8 @@ public class OverworldMobSpawnSpeedAdderListener implements Listener {
     public void onAdditionalEntitySpawn(AdditionalEntitySpawnEvent event) {
         final Entity spawnedEntity = event.getEntity();
         final String worldName = spawnedEntity.getLocation().getWorld().getName();
-        if (!worldName.equals("world") || !shouldMobHaveSpeedMod(spawnedEntity))
+
+        if (!Config.WORLDS_TO_MODIFY.contains(worldName) || !shouldMobHaveSpeedMod(spawnedEntity))
         {
             return;
         }

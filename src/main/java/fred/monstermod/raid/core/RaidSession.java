@@ -109,7 +109,7 @@ public class RaidSession {
         status = RaidSessionStatus.ACTIVE;
 
         RaidTrackerRunnable raidTracker = new RaidTrackerRunnable(this);
-        raidTracker.runTaskTimer(PluginRegistry.Instance().monsterMod, 0, TicksUtil.secondsToTicks(1));
+        raidTracker.runTaskTimer(PluginRegistry.Instance().monsterMod, 0, TicksUtil.secondsToTicks(60));
         this.setRaidTracker(raidTracker);
     }
 
@@ -147,6 +147,12 @@ public class RaidSession {
             if (newLeader == null) return;
 
             newLeader.sendMessage(ChatColor.GREEN + "You have been promoted to the leader of raid session '" +  name + "'");
+        }
+
+        if (getPlayers().isEmpty())
+        {
+            PluginRegistry.Instance().raid.sessions.remove(getName());
+            destroy();
         }
     }
 

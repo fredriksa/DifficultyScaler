@@ -1,7 +1,6 @@
 package fred.monstermod.raid.core;
 
-import fred.monstermod.core.Config;
-import fred.monstermod.core.MessageUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.scheduler.BukkitRunnable;
 
 public class RaidTrackerRunnable extends BukkitRunnable {
@@ -20,25 +19,21 @@ public class RaidTrackerRunnable extends BukkitRunnable {
 
     public void CheckTime()
     {
-        if (session.getElapsedActiveTime() >= Config.SERVER_SHUTDOWN_TIMER_MINUTES)
+        final int minutesUntilTimeOver = RaidConfig.RAID_TIME_LIMIT_MINUTES - (int)session.getElapsedActiveTime();
+        Bukkit.getLogger().info("Raid limit: " + RaidConfig.RAID_TIME_LIMIT_MINUTES + " elapsed: " + session.getElapsedActiveTime() + "minutesUntilTimeOver: " + minutesUntilTimeOver);
+        if (minutesUntilTimeOver > 0)
         {
-            session.end();
-        }
-
-        final int secondsUntilTimeOver = RaidConfig.RAID_TIME_LIMIT_SECONDS - (int)session.getElapsedActiveTime();
-        if (secondsUntilTimeOver > 0)
-        {
-            if (session.getElapsedActiveTime() >= RaidConfig.RAID_TIME_LIMIT_SECONDS - RaidConfig.RAID_TIME_ANNOUNCE_EVERY_SECOND_BEFORE)
+            if (session.getElapsedActiveTime() >= RaidConfig.RAID_TIME_LIMIT_MINUTES - RaidConfig.RAID_TIME_ANNOUNCE_EVERY_MINUTE_BEFORE)
             {
-                session.broadcast("Raid session ends in " + secondsUntilTimeOver + " seconds(s).");
+                session.broadcast("Raid session ends in " + minutesUntilTimeOver + " minute(s).");
             }
-            else if (session.getElapsedActiveTime() % RaidConfig.RAID_TIME_ANNOUNCE_EVERY_SECOND_BEFORE == 0)
+            else if (session.getElapsedActiveTime() % RaidConfig.RAID_TIME_ANNOUNCE_EVERY_MINUTE_BEFORE == 0)
             {
-                session.broadcast("Raid session ends in " + secondsUntilTimeOver + " seconds(s).");
+                session.broadcast("Raid session ends in " + minutesUntilTimeOver + " minute(s).");
             }
         }
 
-        if (secondsUntilTimeOver == 0)
+        if (minutesUntilTimeOver <= 0)
             session.end();
 
         session.setElapsedActiveTime(session.getElapsedActiveTime() + 1);

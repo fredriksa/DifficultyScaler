@@ -1,7 +1,9 @@
 package fred.monstermod.listeners;
 
 import fred.monstermod.core.Config;
+import fred.monstermod.core.MessageUtil;
 import fred.monstermod.core.RandomUtil;
+import org.bukkit.Bukkit;
 import org.bukkit.entity.*;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;

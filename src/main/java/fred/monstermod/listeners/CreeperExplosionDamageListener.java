@@ -17,7 +17,6 @@ public class CreeperExplosionDamageListener implements Listener {
 
         if (isDamageTakenByMonster && isDamageDealtByCreeper)
         {
-            Bukkit.getLogger().info("Cancelled creeper on creeper damage!");
             event.setCancelled(true);
         }
     }

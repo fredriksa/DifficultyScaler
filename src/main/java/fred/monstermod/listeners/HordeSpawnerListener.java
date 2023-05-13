@@ -33,7 +33,7 @@ public class HordeSpawnerListener implements Listener {
     private boolean shouldBeMadeHorde(CreatureSpawnEvent event)
     {
         final String worldName = event.getLocation().getWorld().getName();
-        if (!worldName.equals("world") || !isHordeCandidate(event.getEntity()))
+        if (!Config.WORLDS_TO_MODIFY.contains(worldName) || !isHordeCandidate(event.getEntity()))
         {
             return false;
         }
@@ -58,8 +58,7 @@ public class HordeSpawnerListener implements Listener {
                 return;
             }
 
-            final int hordeCount = spawnModifier.get() * 2;
-            Bukkit.getLogger().info("Spawning horde with count: " + hordeCount);
+            final int hordeCount = spawnModifier.get() * Config.HORDE_SPAWN_MODIFIER;
             for (int i = 0; i < hordeCount; i++)
             {
                 World world = creatureSpawnEvent.getLocation().getWorld();

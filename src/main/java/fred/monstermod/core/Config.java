@@ -1,6 +1,12 @@
 package fred.monstermod.core;
 
+import fred.monstermod.raid.core.RaidConfig;
+
+import java.util.Arrays;
+import java.util.HashSet;
+
 public class Config {
+    public static final String MAIN_WORLD_NAME = "world";
     public static final double ACID_RAIN_MIN_DAMAGE = 0.5d;
     public static final double ACID_RAIN_FINAL_DAY_DAMAGE = 2;
     public static final int ACID_RAIN_START_MIN_CHANCE = 3;
@@ -27,6 +33,8 @@ public class Config {
 
     public static final int ZOMBIE_SLOW_MIN_CHANCE = 9;
     public static final int ZOMBIE_SLOW_MAX_CHANCE = 40;
+
+    public static final int HORDE_SPAWN_MODIFIER = 3;
 
     public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MIN_CHANCE = 20;
     public static final int ZOMBIE_EQUIPMENT_PER_PIECE_MAX_CHANCE = 40;
@@ -103,4 +111,7 @@ public class Config {
     public static final int REVIVE_PLAYER_NEARBY_DISTANCE = 150;
 
     public static final String SERVER_OWNER_USERNAME = "Fredkan";
+
+    // List of worlds that the general difficulty scaler should modify.
+    public static final HashSet<String> WORLDS_TO_MODIFY = new HashSet<>(Arrays.asList(Config.MAIN_WORLD_NAME, RaidConfig.WORLD_NAME));
 }

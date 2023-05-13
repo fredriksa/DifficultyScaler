@@ -4,6 +4,7 @@ import fred.monstermod.core.Config;
 import fred.monstermod.core.DifficultyScaler;
 import fred.monstermod.core.RandomUtil;
 import fred.monstermod.core.listeners.TicksUtil;
+import fred.monstermod.raid.core.RaidUtils;
 import org.bukkit.entity.EntityType;
 import org.bukkit.entity.LivingEntity;
 import org.bukkit.entity.Player;
@@ -26,7 +27,8 @@ public class MonsterSlowDamageListener implements Listener {
             return;
         }
 
-        if (!RandomUtil.shouldEventOccur(Config.ZOMBIE_SLOW_MIN_CHANCE, Config.ZOMBIE_SLOW_MAX_CHANCE))
+        final boolean isInRaidWorld = RaidUtils.isInRaidWorld((Player)event.getEntity());
+        if (!isInRaidWorld && !RandomUtil.shouldEventOccur(Config.ZOMBIE_SLOW_MIN_CHANCE, Config.ZOMBIE_SLOW_MAX_CHANCE))
         {
             return;
         }

@@ -20,7 +20,7 @@ import org.bukkit.event.player.PlayerSpawnChangeEvent;
 
 import java.util.UUID;
 
-public class GenericRaidListeners implements Listener {
+public class PlayerRaidListener implements Listener {
 
     @EventHandler
     public void onPlayerDeath(PlayerDeathEvent event)
@@ -104,7 +104,7 @@ public class GenericRaidListeners implements Listener {
             }
             else
             {
-                event.getPlayer().sendMessage(ChatColor.RED + "All raid members must be present to exit.");
+                event.getPlayer().sendMessage(ChatColor.RED + "All remaining raid members must be present to exit.");
             }
         }
     }

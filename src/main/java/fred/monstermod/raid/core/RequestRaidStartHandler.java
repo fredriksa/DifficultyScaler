@@ -29,7 +29,7 @@ public class RequestRaidStartHandler {
 
         if (Bukkit.getServer().getWorld(RaidConfig.WORLD_NAME) == null)
         {
-            player.sendMessage(Color.ORANGE + "Raid world generation starting... this can take a while");
+            player.sendMessage(ChatColor.YELLOW + " Raid world generation starting... this can take a while");
 
             WorldCreator worldCreator = new WorldCreator(RaidConfig.WORLD_NAME);
             worldCreator.environment(World.Environment.NORMAL);

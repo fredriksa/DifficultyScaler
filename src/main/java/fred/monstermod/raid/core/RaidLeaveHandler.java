@@ -38,7 +38,6 @@ public class RaidLeaveHandler {
     {
         RaidSession session = raid.sessions.getCurrentRaidSession(player);
         session.leave(player);
-        checkRaidSessionCleanup(session);
 
         player.sendMessage(ChatColor.GREEN + "You have left the raid session.");
     }
@@ -48,18 +47,8 @@ public class RaidLeaveHandler {
         RaidSession session = raid.sessions.getCurrentRaidSession(player);
 
         session.leave(player);
-        checkRaidSessionCleanup(session);
 
         player.sendMessage(ChatColor.GREEN + "You have left the raid.");
         player.damage(100);
-    }
-
-    public void checkRaidSessionCleanup(RaidSession session)
-    {
-        if (session.getPlayers().isEmpty())
-        {
-            raid.sessions.remove(session.getName());
-            session.destroy();
-        }
     }
 }
