@@ -4,7 +4,6 @@ import fred.monstermod.core.BlockUtils;
 import fred.monstermod.core.MessageUtil;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.core.RandomUtil;
-import fred.monstermod.core.listeners.TicksUtil;
 import fred.monstermod.raid.Raid;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -12,7 +11,6 @@ import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.meta.CompassMeta;
 import org.bukkit.metadata.FixedMetadataValue;
-import org.bukkit.metadata.MetadataValue;
 
 import java.util.Random;
 import java.util.UUID;
@@ -89,11 +87,9 @@ public class RequestRaidStartHandler {
             Player member = Bukkit.getPlayer(playerUuid);
             if (member == null) continue;
 
-            Location teleportFromLocation = member.getLocation();
-            member.setMetadata(RaidConfig.METADATAKEY_RAID_JOIN_X, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, teleportFromLocation.getX()));
-            member.setMetadata(RaidConfig.METADATAKEY_RAID_JOIN_Y, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, teleportFromLocation.getY()));
-            member.setMetadata(RaidConfig.METADATAKEY_RAID_JOIN_Z, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, teleportFromLocation.getZ()));
-            member.setMetadata(RaidConfig.METADATAKEY_RAID_JOIN_WORLD, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, teleportFromLocation.getWorld().getName()));
+            Location from = member.getLocation();
+
+            raid.playerData.storeExit(member.getUniqueId(), from.getWorld().getName(), from.getX(), from.getY(), from.getZ());
 
             member.teleport(spawnLocation.add(0, 1, 0));
             member.sendMessage(ChatColor.GREEN + "You have been teleported to the raid location. Good luck and have fun!");
@@ -126,8 +122,8 @@ public class RequestRaidStartHandler {
     private Location pickRandomLandLocationImpl()
     {
         World raidWorld = Bukkit.getServer().getWorld(RaidConfig.WORLD_NAME);
-        final int RANDOM_X = (int)RandomUtil.random(-RaidConfig.X_SPREAD, RaidConfig.X_SPREAD);
-        final int RANDOM_Z = (int)RandomUtil.random(-RaidConfig.Z_SPREAD, RaidConfig.Z_SPREAD);
+        final int RANDOM_X = (int)RandomUtil.random(-RaidConfig.START_X_SPREAD, RaidConfig.START_X_SPREAD);
+        final int RANDOM_Z = (int)RandomUtil.random(-RaidConfig.START_Z_SPREAD, RaidConfig.START_Z_SPREAD);
         Block block = BlockUtils.getHighestYBlock(raidWorld, RANDOM_X, RANDOM_Z);
         return block.getLocation();
     }
@@ -153,8 +149,8 @@ public class RequestRaidStartHandler {
         int xRand = random.nextInt(2);
         int zRand = random.nextInt(2);
 
-        int xDistance = xRand == 0 ? 10 : -10;
-        int zDistance = zRand == 0 ? 10 : -10;
+        int xDistance = xRand == 0 ? RaidConfig.END_X_SPREAD : -RaidConfig.END_X_SPREAD;
+        int zDistance = zRand == 0 ? RaidConfig.END_Z_SPREAD : -RaidConfig.END_Z_SPREAD;
 
         Block highestBlock = BlockUtils.getHighestYBlock(spawnLocation.getWorld(), (int) (spawnLocation.getX() + xDistance), (int) (spawnLocation.getZ() + zDistance));
 

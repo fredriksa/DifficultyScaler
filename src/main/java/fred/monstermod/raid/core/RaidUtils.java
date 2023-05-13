@@ -1,5 +1,6 @@
 package fred.monstermod.raid.core;
 
+import fred.monstermod.core.PluginRegistry;
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
 import org.bukkit.World;
@@ -10,20 +11,17 @@ import org.bukkit.inventory.PlayerInventory;
 public class RaidUtils {
     public static Location playerTeleportBackLocation(Player player)
     {
-        if (player.hasMetadata(RaidConfig.METADATAKEY_RAID_JOIN_WORLD))
+        PlayerRaidDataStore.ExitData exitData = PluginRegistry.Instance().raid.playerData.getExitData(player.getUniqueId());
+        if (exitData == null)
         {
-            Bukkit.getLogger().info("MetaRaidJoinWorld size: " + player.getMetadata(RaidConfig.METADATAKEY_RAID_JOIN_WORLD).size());
-            final String worldName = player.getMetadata(RaidConfig.METADATAKEY_RAID_JOIN_WORLD).get(0).asString();
-            World teleportBackToWorld = Bukkit.getWorld(worldName);
-
-            int x = player.getMetadata(RaidConfig.METADATAKEY_RAID_JOIN_X).get(0).asInt();
-            int y = player.getMetadata(RaidConfig.METADATAKEY_RAID_JOIN_Y).get(0).asInt();
-            int z = player.getMetadata(RaidConfig.METADATAKEY_RAID_JOIN_Z).get(0).asInt();
-
-            return teleportBackToWorld.getBlockAt(x,y,z).getLocation();
+            player.sendMessage("Could not find teleport back to location!");
+            return null;
         }
 
-        return null;
+        World teleportBackToWorld = Bukkit.getWorld(exitData.worldName);
+        if (teleportBackToWorld == null) return null;
+
+        return teleportBackToWorld.getBlockAt((int)exitData.x, (int)exitData.y + 1, (int)exitData.z).getLocation();
     }
 
     public static void teleportPlayerBack(Player player)
