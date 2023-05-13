@@ -9,6 +9,8 @@ import fred.monstermod.raid.Raid;
 import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.metadata.FixedMetadataValue;
+import org.bukkit.metadata.MetadataValue;
 
 import java.util.UUID;
 
@@ -83,6 +85,12 @@ public class RequestRaidStartHandler {
         {
             Player member = Bukkit.getPlayer(playerUuid);
             if (member == null) continue;
+
+            Location teleportFromLocation = member.getLocation();
+            member.setMetadata(RaidConfig.METADATAKEY_RAID_JOIN_X, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, teleportFromLocation.getX()));
+            member.setMetadata(RaidConfig.METADATAKEY_RAID_JOIN_Y, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, teleportFromLocation.getY()));
+            member.setMetadata(RaidConfig.METADATAKEY_RAID_JOIN_Z, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, teleportFromLocation.getZ()));
+            member.setMetadata(RaidConfig.METADATAKEY_RAID_JOIN_WORLD, new FixedMetadataValue(PluginRegistry.Instance().monsterMod, teleportFromLocation.getWorld().getName()));
 
             member.teleport(spawnLocation.add(0, 1, 0));
             member.sendMessage(ChatColor.GREEN + "You have been teleported to the raid location. Good luck and have fun!");

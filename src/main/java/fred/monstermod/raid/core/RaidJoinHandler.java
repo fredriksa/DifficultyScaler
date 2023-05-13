@@ -12,13 +12,13 @@ public class RaidJoinHandler {
         raid = _raid;
     }
 
-    public void onRaidJoin(Player player, String message)
+    public boolean onRaidJoin(Player player, String message)
     {
         String[] commands = message.split(" ");
-        if (commands.length != 3) return;
+        if (commands.length != 3) return false;
 
         String raidSessionName = commands[2];
-        joinRaid(player, raidSessionName);
+        return joinRaid(player, raidSessionName);
     }
 
     private boolean joinRaid(Player player, String raidSessionName)

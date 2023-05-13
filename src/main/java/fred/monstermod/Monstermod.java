@@ -8,6 +8,7 @@ import fred.monstermod.general.PhaseChangedAdverter;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.listeners.UndergroundMobSpawnSpeedAdderListener;
 import fred.monstermod.listeners.*;
+import fred.monstermod.raid.listeners.GenericRaidListeners;
 import fred.monstermod.raid.listeners.RaidCommandListener;
 import fred.monstermod.runnables.LookingAtPiglinStarterRunnable;
 import fred.monstermod.systems.ReviveSystem;
@@ -75,6 +76,7 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new EntityDamageListener(), this);
 
         pluginManager.registerEvents(new RaidCommandListener(), this);
+        pluginManager.registerEvents(new GenericRaidListeners(), this);
 
         if (Config.REVIVE_SYSTEM_ENABLED)
         {

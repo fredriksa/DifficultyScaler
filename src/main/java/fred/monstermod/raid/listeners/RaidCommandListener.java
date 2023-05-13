@@ -26,6 +26,7 @@ public class RaidCommandListener implements Listener {
         else if (event.getMessage().startsWith(RAID_JOIN_PREFIX_COMMAND))
         {
             onChatRaidJoin(event.getPlayer(), event.getMessage());
+            event.setCancelled(true);
         }
         else if (event.getMessage().equals(RAID_LEAVE_COMMAND))
         {
