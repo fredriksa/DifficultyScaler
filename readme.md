@@ -8,18 +8,17 @@ Also introduces a set of new mechanics that increases the challenge of staying a
 
 ## Raids
 
-Players are able to form raiding groups and go on raiding incursions into another world in search for treasure. Raids have a time limit, and before the time is up, players must have reached the exit location pointed to by the compass. Only the raid leader will spawn with the exit point compass, so make sure to follow the leader or else you will most likely not manage to locate the exit point.
+Players can form raiding groups and go on raiding incursions into another world in search of treasure. Raids have a time limit; before the time is up, players must have reached the exit location pointed to by the compass. Only the raid leader will spawn with the exit point compass, so make sure to follow the leader, or else you will most likely not manage to locate the exit point.
 
-The exit point is unbreakable and can be identified by a campfire on-top of a stone tower. The exit point is always on the surface of the world. To exit, right click the campfire. All members of the raid team must be nearby or else exiting will fail. Upon exit, raid specific items are removed from the player's inventory, e.g. the leader's compass.
+The exit point is unbreakable and can be identified by a campfire on top of a stone tower. The exit point is always on the surface of the world. To exit, right-click the campfire. All raid team members must be nearby, or else exiting will fail. Upon exit, raid-specific items get removed from the player's inventory, e.g., the leader's compass.
 
 ![img](images/compass_raid.jpeg)
 
-Throughout the raid, the player will be notified of the remaining raid time on a 5 minutes interval. A countdown announcing every minute will begin when there is 5 minutes left.
+Throughout the raid, the player will be notified of the remaining raid time at a 5 minutes interval. In addition, a countdown that announces every minute starts when 5 minutes remain.
 
-To enable adventuring, a restriction has been set for how many blocks a player can break within a raid. This restriction does not apply to valuable blocks such as iron ore. The idea is to restrict the power of strip mining while pushing the player to go towards cave exploration.
+A restriction has been set for how many blocks a player can break within a raid to make adventuring the most viable strategy. However, this restriction does not apply to valuable blocks like iron ore. The idea is to restrict the power of strip mining while pushing the player toward cave exploration.
 
-Enemies will deal more damage during a raid. They are more likely to slow you as well. On top of that, zombies do not burn in daylight and other misc. modifications have been added to make the raid more exciting. As a reward, the player will find valuables at an increased rate.
-
+Enemies will deal more damage during a raid. They are more likely to slow you as well. On top of that, zombies do not burn in daylight, and other miscellaneous modifications have been added to make the raid more exciting. As a reward, the player will find valuables at an increased rate.
 
 Commands:
 - !raid join #name  
