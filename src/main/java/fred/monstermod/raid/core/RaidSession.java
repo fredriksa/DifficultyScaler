@@ -9,6 +9,7 @@ import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.scheduler.BukkitRunnable;
 
+import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Random;
 import java.util.UUID;
@@ -29,6 +30,8 @@ public class RaidSession {
     private double exitY;
     private double exitZ;
 
+    private HashMap<UUID, Integer> playerUuidToBrokenBlockCount = new HashMap<UUID, Integer>();
+
     private RaidTrackerRunnable raidTracker;
     private SessionEndHandler endHandler = new SessionEndHandler(this);
 
@@ -47,6 +50,7 @@ public class RaidSession {
     public double getExitX() { return exitX; }
     public double getExitY() { return exitY; }
     public double getExitZ() { return exitZ; }
+    public HashMap<UUID, Integer> getBrokenBlockCounts() { return playerUuidToBrokenBlockCount; }
 
     public void setLeader(UUID leader)  { this.leader = leader; }
     public void setName(String name) { this.name = name; }
@@ -144,6 +148,30 @@ public class RaidSession {
 
             newLeader.sendMessage(ChatColor.GREEN + "You have been promoted to the leader of raid session '" +  name + "'");
         }
+    }
+
+    public void brokeBlock(Player player)
+    {
+        if (player == null) return;
+
+        if (playerUuidToBrokenBlockCount.containsKey(player.getUniqueId()))
+        {
+            playerUuidToBrokenBlockCount.put(player.getUniqueId(), playerUuidToBrokenBlockCount.get(player.getUniqueId()) + 1);
+        }
+        else
+        {
+            playerUuidToBrokenBlockCount.put(player.getUniqueId(), 1);
+        }
+    }
+
+    public int brokenBlockCount(Player player)
+    {
+        return playerUuidToBrokenBlockCount.getOrDefault(player.getUniqueId(), 0);
+    }
+
+    public void setBrokenBlockCount(UUID playerUuid, int count)
+    {
+        playerUuidToBrokenBlockCount.put(playerUuid, count);
     }
 
     public void end()

@@ -7,6 +7,8 @@ import org.bukkit.entity.Player;
 
 import java.io.*;
 import java.util.HashMap;
+import java.util.Map;
+import java.util.Set;
 import java.util.UUID;
 
 public class RaidSessionStore {
@@ -23,6 +25,7 @@ public class RaidSessionStore {
     private final String exitXProperty = "exitX";
     private final String exitYProperty = "exitY";
     private final String exitZProperty = "exitZ";
+    private final String brokenBlocksProperty = "brokenBlocks";
 
     public RaidSession getCurrentRaidSession(Player player)
     {
@@ -93,10 +96,16 @@ public class RaidSessionStore {
                         session.silentJoin(playerUuid);
                 }
 
+                JsonObject brokenBlocks = raid.get(brokenBlocksProperty).getAsJsonObject();
+                for (Map.Entry<String, JsonElement> entry : brokenBlocks.entrySet())
+                {
+                    final UUID playerUuid = UUID.fromString(entry.getKey());
+                    session.setBrokenBlockCount(playerUuid, entry.getValue().getAsInt());
+                }
+
+                // Avoid loading raids that are empty.
                 if (!playersArray.isEmpty())
                 {
-                    Bukkit.getLogger().info("Here #1");
-                    // Avoid loading raids that are empty.
                     raidSessionNameToRaidSession.put(session.getName(), session);
                     session.onLoadFromFile();
                 }
@@ -125,6 +134,12 @@ public class RaidSessionStore {
             raidJson.addProperty(exitXProperty, raidSession.getExitX());
             raidJson.addProperty(exitYProperty, raidSession.getExitY());
             raidJson.addProperty(exitZProperty, raidSession.getExitZ());
+
+            JsonObject brokenBlocks = new JsonObject();
+            for (Map.Entry<UUID, Integer> entry : raidSession.getBrokenBlockCounts().entrySet())
+                brokenBlocks.addProperty(entry.getKey().toString(), entry.getValue());
+
+            raidJson.add(brokenBlocksProperty, brokenBlocks);
 
             JsonArray playersJson = new JsonArray();
             for (UUID playerUuid : raidSession.getPlayers())

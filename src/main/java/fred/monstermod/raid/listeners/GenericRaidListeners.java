@@ -4,6 +4,7 @@ import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.raid.core.RaidConfig;
 import fred.monstermod.raid.core.RaidSession;
 import fred.monstermod.raid.core.RaidUtils;
+import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.block.Block;
@@ -16,6 +17,8 @@ import org.bukkit.event.entity.PlayerDeathEvent;
 import org.bukkit.event.player.PlayerInteractEvent;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.event.player.PlayerSpawnChangeEvent;
+
+import java.util.UUID;
 
 public class GenericRaidListeners implements Listener {
 
@@ -81,9 +84,28 @@ public class GenericRaidListeners implements Listener {
             if (!session.isExitBlock(clickedBlock))
                 return;
 
-            session.leave(event.getPlayer());
-            RaidUtils.teleportPlayerBack(event.getPlayer());
-            event.getPlayer().sendMessage(ChatColor.GREEN + "You made it, congratulations!");
+            boolean isEveryoneNear = true;
+            for (UUID playerUuid : session.getPlayers())
+            {
+                Player member = Bukkit.getPlayer(playerUuid);
+                if (member == null) continue;
+                if (!member.getWorld().getName().equals(RaidConfig.WORLD_NAME)) continue;
+
+                double distanceBetweenPlayers = event.getPlayer().getLocation().distance(member.getLocation());
+                if (distanceBetweenPlayers > RaidConfig.EXTRACTION_DISTANCE_MAX)
+                    isEveryoneNear = false;
+            }
+
+            if (isEveryoneNear)
+            {
+                session.leave(event.getPlayer());
+                RaidUtils.teleportPlayerBack(event.getPlayer());
+                event.getPlayer().sendMessage(ChatColor.GREEN + "You made it out alive, congratulations!");
+            }
+            else
+            {
+                event.getPlayer().sendMessage(ChatColor.RED + "All raid members must be present to exit.");
+            }
         }
     }
 
