@@ -4,15 +4,19 @@ import fred.monstermod.core.MessageUtil;
 import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.core.listeners.TicksUtil;
 import fred.monstermod.raid.core.RaidConfig;
+import org.bukkit.Bukkit;
 import org.bukkit.Color;
 import org.bukkit.Location;
 import org.bukkit.entity.Arrow;
 import org.bukkit.entity.EntityType;
+import org.bukkit.entity.LivingEntity;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.entity.EntityShootBowEvent;
 import org.bukkit.scheduler.BukkitRunnable;
 import org.bukkit.util.Vector;
+
+import java.util.UUID;
 
 public class SkeletonArrowSprayListener implements Listener {
 
@@ -27,17 +31,18 @@ public class SkeletonArrowSprayListener implements Listener {
 
         Arrow arrow = (Arrow) event.getProjectile();
 
+
         BukkitRunnable shootLaterOneSecond = new BukkitRunnable() {
             @Override
             public void run() {
-                shootLater(event, arrow.getVelocity());
+                shootLater(event.getEntity().getUniqueId(), arrow.getVelocity().length());
             }
         };
 
         BukkitRunnable shootLaterTwoSeconds = new BukkitRunnable() {
             @Override
             public void run() {
-                shootLater(event, arrow.getVelocity());
+                shootLater(event.getEntity().getUniqueId(), arrow.getVelocity().length());
             }
         };
 
@@ -45,18 +50,21 @@ public class SkeletonArrowSprayListener implements Listener {
         shootLaterTwoSeconds.runTaskLater(PluginRegistry.Instance().monsterMod, TicksUtil.secondsToTicks(2));
     }
 
-    private void shootLater(EntityShootBowEvent event, Vector velocity)
+    private void shootLater(UUID uuid, double velocity)
     {
-        Location spawnLocation = event.getEntity().getEyeLocation();
+        LivingEntity entity = (LivingEntity) Bukkit.getEntity(uuid);
+        if (entity == null) return;
+
+        Location spawnLocation = entity.getEyeLocation();
         spawnLocation.add(spawnLocation.getDirection().normalize().multiply(2));
 
-        Arrow arrow = event.getEntity().getWorld().spawn(spawnLocation, Arrow.class);
+        Arrow arrow = entity.getWorld().spawn(spawnLocation, Arrow.class);
         arrow.setColor(Color.RED);
         arrow.setDamage(1);
         arrow.setKnockbackStrength(7);
-        arrow.setShooter(event.getEntity());
-        arrow.setVelocity(velocity);
-        //arrowOne.setVelocity(arrow.getVelocity().rotateAroundY(Math.toRadians(35)));
+        arrow.setShooter(entity);
+
+        arrow.setVelocity(entity.getLocation().getDirection().normalize().multiply(velocity));
     }
 
 }
