@@ -6,9 +6,7 @@ Also introduces a set of new mechanics that increases the challenge of staying a
 
 # List of features
 
-## Raid Event
-
-# Raids
+## Raids
 
 Players are able to form raiding groups and go on raiding incursions into another world in search for treasure. Raids have a time limit, and before the time is up, players must have reached the exit location pointed to by the compass. Only the raid leader will spawn with the exit point compass, so make sure to follow the leader or else you will most likely not manage to locate the exit point.
 
@@ -36,7 +34,6 @@ Good to know:
 - It's not possible to set a spawn location in the raid world.
 
 - Raids will never begin in a water location.
-
 
 
 ## Server-wide voting
