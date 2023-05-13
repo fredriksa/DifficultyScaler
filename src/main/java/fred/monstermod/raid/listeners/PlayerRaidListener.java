@@ -31,6 +31,7 @@ public class PlayerRaidListener implements Listener {
         RaidSession session = PluginRegistry.Instance().raid.sessions.getCurrentRaidSession(player);
         if (session == null) return;
         session.leave(player);
+        player.sendMessage(ChatColor.RED + "Loot eludes you... for now!");
     }
 
     @EventHandler

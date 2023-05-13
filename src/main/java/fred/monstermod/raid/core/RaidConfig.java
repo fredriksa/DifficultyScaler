@@ -6,8 +6,8 @@ public class RaidConfig {
     public static final int START_X_SPREAD = 8000000;
     public static final int START_Z_SPREAD = 8000000;
 
-    public static final int END_X_SPREAD = 300;
-    public static final int END_Z_SPREAD = 300;
+    public static final int END_X_SPREAD = 400;
+    public static final int END_Z_SPREAD = 400;
 
     public static final int RAID_TIME_LIMIT_MINUTES = 25;
     public static final int RAID_TIME_ANNOUNCE_EVERY_MINUTE_BEFORE = 5;
