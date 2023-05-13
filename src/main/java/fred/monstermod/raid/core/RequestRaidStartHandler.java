@@ -2,7 +2,9 @@ package fred.monstermod.raid.core;
 
 import fred.monstermod.core.BlockUtils;
 import fred.monstermod.core.MessageUtil;
+import fred.monstermod.core.PluginRegistry;
 import fred.monstermod.core.RandomUtil;
+import fred.monstermod.core.listeners.TicksUtil;
 import fred.monstermod.raid.Raid;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -77,8 +79,6 @@ public class RequestRaidStartHandler {
 
         Location spawnLocation = pickRandomLandLocation();
 
-        session.activate();
-
         for (UUID playerUuid : session.getPlayers())
         {
             Player member = Bukkit.getPlayer(playerUuid);
@@ -87,6 +87,8 @@ public class RequestRaidStartHandler {
             member.teleport(spawnLocation.add(0, 1, 0));
             member.sendMessage(ChatColor.GREEN + "You have been teleported to the raid location. Good luck and have fun!");
         }
+
+        session.activate(false);
     }
 
     private Location pickRandomLandLocation()

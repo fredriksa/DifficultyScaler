@@ -59,6 +59,7 @@ public class RaidLeaveHandler {
         if (session.getPlayers().isEmpty())
         {
             raid.sessions.remove(session.getName());
+            session.destroy();
         }
     }
 }

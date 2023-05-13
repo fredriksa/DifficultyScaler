@@ -3,7 +3,6 @@ package fred.monstermod.raid.core;
 import com.google.gson.*;
 import fred.monstermod.core.PluginRegistry;
 import org.bukkit.Bukkit;
-import org.bukkit.OfflinePlayer;
 import org.bukkit.entity.Player;
 
 import java.io.*;
@@ -20,6 +19,7 @@ public class RaidSessionStore {
     private final String leaderProperty = "leader";
     private final String statusProperty = "status";
     private final String playersProperty = "players";
+    private final String elapsedActiveTimeProperty = "elapsedActiveTime";
 
     public RaidSession getCurrentRaidSession(Player player)
     {
@@ -45,7 +45,7 @@ public class RaidSessionStore {
         RaidSession session = new RaidSession();
         session.setName(raidSessionName);
         session.setLeader(leader.getUniqueId());
-        session.silentJoin(leader);
+        session.silentJoin(leader.getUniqueId());
 
         raidSessionNameToRaidSession.put(raidSessionName, session);
         return session;
@@ -76,32 +76,29 @@ public class RaidSessionStore {
                 session.setUuid(UUID.fromString(raid.get(uuidProperty).getAsString()));
                 session.setLeader(UUID.fromString(raid.get(leaderProperty).getAsString()));
                 session.setStatus(RaidSessionStatus.valueOf(raid.get(statusProperty).getAsString()));
+                session.setElapsedActiveTime(raid.get(elapsedActiveTimeProperty).getAsLong());
 
                 JsonArray playersArray = raid.get(playersProperty).getAsJsonArray();
                 for (JsonElement element : playersArray)
                 {
-                    Player player = Bukkit.getPlayer(UUID.fromString(element.getAsString()));
-                    if (player == null)
-                    {
-                        Bukkit.getLogger().info("could not load player with UUID: " + element.getAsString());
-                        continue;
-                    }
-
-                    UUID playerRaidUuid = PluginRegistry.Instance().raid.playerData.getRaidUuid(player.getUniqueId());
+                    UUID playerUuid = UUID.fromString(element.getAsString());
+                    UUID playerRaidUuid = PluginRegistry.Instance().raid.playerData.getRaidUuid(playerUuid);
                     if (playerRaidUuid == null || playerRaidUuid.equals(session.getUuid()))
-                        session.silentJoin(player);
+                        session.silentJoin(playerUuid);
                 }
 
                 if (!playersArray.isEmpty())
                 {
+                    Bukkit.getLogger().info("Here #1");
                     // Avoid loading raids that are empty.
                     raidSessionNameToRaidSession.put(session.getName(), session);
+                    session.onLoadFromFile();
                 }
             }
 
         } catch (Exception e) {
+            e.printStackTrace();
             Bukkit.getLogger().info("RaidSessionStore - failed raids from disk!");
-            throw new RuntimeException(e);
         }
     }
 
@@ -118,6 +115,7 @@ public class RaidSessionStore {
             raidJson.addProperty(uuidProperty, raidSession.getUuid().toString());
             raidJson.addProperty(statusProperty, raidSession.getStatus().toString());
             raidJson.addProperty(leaderProperty, raidSession.getLeader().toString());
+            raidJson.addProperty(elapsedActiveTimeProperty, raidSession.getElapsedActiveTime());
 
             JsonArray playersJson = new JsonArray();
             for (UUID playerUuid : raidSession.getPlayers())
