@@ -1,18 +1,15 @@
 package fred.monstermod.raid.listeners;
 
-import fred.monstermod.core.MessageUtil;
 import fred.monstermod.raid.core.RaidConfig;
 import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.event.EventHandler;
 import org.bukkit.event.Listener;
 import org.bukkit.event.block.BlockBreakEvent;
-import org.bukkit.event.block.BlockDropItemEvent;
 import org.bukkit.inventory.ItemStack;
 
 import java.util.Collection;
 import java.util.HashSet;
-import java.util.List;
 
 public class BlockDropListener implements Listener {
 
@@ -42,7 +39,7 @@ public class BlockDropListener implements Listener {
 
         increaseBlockDropsFor.add(Material.RAW_COPPER);
         increaseBlockDropsFor.add(Material.RAW_IRON_BLOCK);
-        increaseBlockDropsFor.add(Material.RAW_IRON_BLOCK);
+        increaseBlockDropsFor.add(Material.RAW_GOLD_BLOCK);
     }
 
     @EventHandler

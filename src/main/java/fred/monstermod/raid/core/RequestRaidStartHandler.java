@@ -1,9 +1,6 @@
 package fred.monstermod.raid.core;
 
-import fred.monstermod.core.BlockUtils;
-import fred.monstermod.core.MessageUtil;
-import fred.monstermod.core.PluginRegistry;
-import fred.monstermod.core.RandomUtil;
+import fred.monstermod.core.*;
 import fred.monstermod.raid.Raid;
 import org.bukkit.*;
 import org.bukkit.block.Block;
@@ -69,6 +66,14 @@ public class RequestRaidStartHandler {
         if (raidSession.getStatus() != RaidSessionStatus.PREPARING)
         {
             player.sendMessage(ChatColor.RED + "You can not start raid '" + raidSession.getName()  + "' when it is already in progress.");
+            return false;
+        }
+
+        int raidOnlinePlayers = PlayerUtils.getOnlinePlayerCount(raidSession.getPlayers());
+        if (raidOnlinePlayers < RaidConfig.REQUIRED_ONLINE_PLAYERS)
+        {
+            player.sendMessage(ChatColor.RED + "You can not start the raid. You need at least " +  RaidConfig.REQUIRED_ONLINE_PLAYERS +
+                               " player(s) online in your raid. Currently " + raidOnlinePlayers + " is online.");
             return false;
         }
 

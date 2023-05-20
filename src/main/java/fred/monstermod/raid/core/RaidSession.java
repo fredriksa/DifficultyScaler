@@ -64,7 +64,7 @@ public class RaidSession {
 
     public void destroy()
     {
-        raidTracker.cancel();
+        if (raidTracker != null) raidTracker.cancel();
         PluginRegistry.Instance().raid.sessions.remove(name);
     }
 

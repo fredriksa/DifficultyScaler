@@ -80,6 +80,7 @@ public final class Monstermod extends JavaPlugin {
         pluginManager.registerEvents(new BlockDropListener(), this);
         pluginManager.registerEvents(new SkeletonArrowSprayListener(), this);
         pluginManager.registerEvents(new MonsterRaidListener(), this);
+        pluginManager.registerEvents(new WorldInitListener(), this);
 
         if (Config.REVIVE_SYSTEM_ENABLED)
         {

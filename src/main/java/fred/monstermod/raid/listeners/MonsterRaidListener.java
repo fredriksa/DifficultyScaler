@@ -37,10 +37,6 @@ public class MonsterRaidListener implements Listener {
             Location spawnLocation = highestBlock.getLocation().add(0, 25, 0);
             Entity spawnedEntity = entity.getWorld().spawnEntity(spawnLocation, EntityType.GHAST);
             spawnedEntity.setPersistent(true);
-
-            Location spawnLocationTwo = spawnLocation.add(2, 0, 2);
-            Entity spawnedEntityTwo = entity.getWorld().spawnEntity(spawnLocationTwo, EntityType.GHAST);
-            spawnedEntityTwo.setPersistent(true);
         }
     }
 }

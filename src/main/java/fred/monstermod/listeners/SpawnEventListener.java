@@ -22,11 +22,13 @@ public class SpawnEventListener implements Listener {
 
     public SpawnEventListener()
     {
-        List<EntityType> defaultMonstersList = Arrays.asList(EntityType.ZOMBIE, EntityType.SPIDER, EntityType.SKELETON, EntityType.CREEPER);
+        List<EntityType> defaultMonstersList = Arrays.asList(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.CREEPER);
         entityTypeToEntityTypes.put(EntityType.ZOMBIE, defaultMonstersList);
-        entityTypeToEntityTypes.put(EntityType.SPIDER, defaultMonstersList);
         entityTypeToEntityTypes.put(EntityType.SKELETON, defaultMonstersList);
         entityTypeToEntityTypes.put(EntityType.CREEPER, defaultMonstersList);
+
+        List<EntityType> spiderMonstersList = Arrays.asList(EntityType.ZOMBIE, EntityType.SKELETON, EntityType.CREEPER);
+        entityTypeToEntityTypes.put(EntityType.SPIDER, spiderMonstersList);
     }
 
     @EventHandler
