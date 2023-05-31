@@ -1,4 +1,4 @@
-# Zombie Mod
+# Difficulty Scaler
 
 Improves Minecraft's CO-OP experience by dynamically increasing the difficulty of the game based on the number of people online.
 
